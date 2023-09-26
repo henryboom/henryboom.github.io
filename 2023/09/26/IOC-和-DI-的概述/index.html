@@ -21,25 +21,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="今天你干饭了吗？">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Henry&#39;s Blog">
-<meta property="og:url" content="http://example.com/archives/2023/index.html">
+    <meta name="description" content="IOC 和 DI 的概述IOC(Inversion of Controll)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IOC 和 DI 的概述">
+<meta property="og:url" content="http://example.com/2023/09/26/IOC-%E5%92%8C-DI-%E7%9A%84%E6%A6%82%E8%BF%B0/index.html">
 <meta property="og:site_name" content="Henry&#39;s Blog">
-<meta property="og:description" content="今天你干饭了吗？">
+<meta property="og:description" content="IOC 和 DI 的概述IOC(Inversion of Controll)">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-26T07:24:11.000Z">
+<meta property="article:modified_time" content="2023-09-26T07:25:21.200Z">
 <meta property="article:author" content="Henry">
+<meta property="article:tag" content="spring">
+<meta property="article:tag" content="原理">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/archives/2023/">
+<link rel="canonical" href="http://example.com/2023/09/26/IOC-%E5%92%8C-DI-%E7%9A%84%E6%A6%82%E8%BF%B0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"archives/2023/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/09/26/IOC-%E5%92%8C-DI-%E7%9A%84%E6%A6%82%E8%BF%B0/","path":"2023/09/26/IOC-和-DI-的概述/","title":"IOC 和 DI 的概述"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>归档 | Henry's Blog</title>
+<title>IOC 和 DI 的概述 | Henry's Blog</title>
   
 
 
@@ -72,7 +76,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Henry's Blog</h1>
+      <p class="site-title">Henry's Blog</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Code builds world !</p>
@@ -126,7 +130,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -139,6 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IOC-%E5%92%8C-DI-%E7%9A%84%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">IOC 和 DI 的概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IOC-Inversion-of-Controll"><span class="nav-number">1.1.</span> <span class="nav-text">IOC(Inversion of Controll)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DI-Dependency-Injection"><span class="nav-number">1.2.</span> <span class="nav-text">DI(Dependency Injection)</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,109 +224,153 @@
 
     </div>
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 5 篇日志。 继续努力。</span>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/26/IOC-%E5%92%8C-DI-%E7%9A%84%E6%A6%82%E8%BF%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lbxx.jpg">
+      <meta itemprop="name" content="Henry">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Henry's Blog">
+      <meta itemprop="description" content="今天你干饭了吗？">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="IOC 和 DI 的概述 | Henry's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          IOC 和 DI 的概述
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+
+      <time title="创建时间：2023-09-26 15:24:11 / 修改时间：15:25:21" itemprop="dateCreated datePublished" datetime="2023-09-26T15:24:11+08:00">2023-09-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2023/09/26/IOC-%E5%92%8C-DI-%E7%9A%84%E6%A6%82%E8%BF%B0/" class="post-meta-item leancloud_visitors" data-flag-title="IOC 和 DI 的概述" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>153</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="IOC-和-DI-的概述"><a href="#IOC-和-DI-的概述" class="headerlink" title="IOC 和 DI 的概述"></a>IOC 和 DI 的概述</h1><h2 id="IOC-Inversion-of-Controll"><a href="#IOC-Inversion-of-Controll" class="headerlink" title="IOC(Inversion of Controll)"></a>IOC(Inversion of Controll)</h2><span id="more"></span>
+
+<p><strong>思想是反转资源获取的方向</strong>，传统的资源查找方式要求组件向容器发起请求查找资源。作为回应，容器适时的返回资源。而应用了IOC之后，则是<strong>容器主动的将资源推送给它所管理的组件，组件所要做的仅是选择一种合适的方式来接收资源</strong></p>
+<h2 id="DI-Dependency-Injection"><a href="#DI-Dependency-Injection" class="headerlink" title="DI(Dependency Injection)"></a>DI(Dependency Injection)</h2><p>是IOC的另一种表述方式，即<strong>组件以一些预先定义好的方式(如：getter方法)来接收来自容器的资源注入</strong></p>
+<!-- more -->
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-09-26T15:25:42+08:00"
-              content="2023-09-26">
-          09-26
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/09/26/Spring%E9%85%8D%E7%BD%AE/" itemprop="url">
-          <span itemprop="name">Spring配置</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-09-26T15:24:11+08:00"
-              content="2023-09-26">
-          09-26
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/09/26/IOC-%E5%92%8C-DI-%E7%9A%84%E6%A6%82%E8%BF%B0/" itemprop="url">
-          <span itemprop="name">IOC 和 DI 的概述</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-09-26T15:14:19+08:00"
-              content="2023-09-26">
-          09-26
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/09/26/spring/" itemprop="url">
-          <span itemprop="name">spring</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-09-26T09:20:41+08:00"
-              content="2023-09-26">
-          09-26
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/09/26/nas%E8%AE%B0%E5%BD%95/" itemprop="url">
-          <span itemprop="name">nas记录</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-
-    </div>
-  </div>
+    
+<div>
   
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！-------------</div>
+    
+</div>
+
   
-  
+</div>
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring/" rel="tag"># spring</a>
+              <a href="/tags/%E5%8E%9F%E7%90%86/" rel="tag"># 原理</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/26/spring/" rel="prev" title="spring">
+                  <i class="fa fa-angle-left"></i> spring
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/09/26/Spring%E9%85%8D%E7%BD%AE/" rel="next" title="Spring配置">
+                  Spring配置 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
 
 </div>
   </main>
