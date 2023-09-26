@@ -58,6 +58,8 @@
     <title>Spring配置</title>
     <url>/2023/09/26/Spring%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<h1 id="Spring配置"><a href="#Spring配置" class="headerlink" title="Spring配置"></a>Spring配置</h1><p>在SpringIOC容器读取bean配置创建bean实例之前，必须对它进行实例化。只有在容器实例化后，才可以从IOC容器里获取bean实例并使用</p>
+<span id="more"></span>
+
 <p>Spring提供了两种类型的IOC容器实现</p>
 <ul>
 <li><strong>BeanFactory：IOC容器的基本实现，在调用getBean()方法时才会实例化对象</strong></li>
