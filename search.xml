@@ -243,6 +243,8 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 统一 json 异常处理</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> exception JsonException</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 统一返回 json 格式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@ExceptionHandler(value = JsonException.class)</span></span><br><span class="line"><span class="meta">@ResponseBody</span>  </span><br><span class="line"><span class="keyword">public</span> ApiResponse <span class="title function_">jsonErrorHandler</span><span class="params">(JsonException exception)</span> &#123;</span><br><span class="line"></span><br><span class="line">    log.error(<span class="string">&quot;【JsonException】:&#123;&#125;&quot;</span>, exception.getMessage());</span><br><span class="line">    <span class="keyword">return</span> ApiResponse.ofException(exception);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <img data-src="https://typora-1304976013.cos.ap-chongqing.myqcloud.com/img/image-20231005101405997.png" alt="image-20231005101405997" style="zoom:67%;" /> 
+
+<p><img data-src="https://typora-1304976013.cos.ap-chongqing.myqcloud.com/img/image-20231005102227733.png" alt="image-20231005102227733"></p>
 ]]></content>
       <categories>
         <category>后端</category>
