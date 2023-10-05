@@ -232,4 +232,27 @@
         <tag>原理</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ExceptionHandler</title>
+    <url>/2023/10/05/ExceptionHandler/</url>
+    <content><![CDATA[<span id="more"></span>
+
+<p>当使用测试  &#x2F;json</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/json&quot;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="keyword">public</span> ApiResponse <span class="title function_">jsonException</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">JsonException</span>(Status.UNKNOWN_ERROR);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/page&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ModelAndView <span class="title function_">pageException</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">PageException</span>(Status.UNKNOWN_ERROR);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>抛出异常，</p>
+<p>@ExceptionHandler(value &#x3D; JsonException.class) 注解用于指定这个方法处理的异常类型，即 JsonException。当控制器中抛出 JsonException 或其子类的异常时，Spring会自动调用这个方法来处理异常。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 统一 json 异常处理</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> exception JsonException</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 统一返回 json 格式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@ExceptionHandler(value = JsonException.class)</span></span><br><span class="line"><span class="meta">@ResponseBody</span>  </span><br><span class="line"><span class="keyword">public</span> ApiResponse <span class="title function_">jsonErrorHandler</span><span class="params">(JsonException exception)</span> &#123;</span><br><span class="line"></span><br><span class="line">    log.error(<span class="string">&quot;【JsonException】:&#123;&#125;&quot;</span>, exception.getMessage());</span><br><span class="line">    <span class="keyword">return</span> ApiResponse.ofException(exception);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img data-src="https://typora-1304976013.cos.ap-chongqing.myqcloud.com/img/image-20231005101405997.png" alt="image-20231005101405997" style="zoom:67%;" /> 
+]]></content>
+      <categories>
+        <category>后端</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
+        <tag>原理</tag>
+      </tags>
+  </entry>
 </search>
