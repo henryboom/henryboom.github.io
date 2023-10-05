@@ -168,12 +168,9 @@
   <entry>
     <title>Spring开发中的常用注解</title>
     <url>/2023/10/04/Spring%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<h2 id="Component"><a href="#Component" class="headerlink" title="@Component"></a>@Component</h2><p>该注解在类上使用，使用该注解就相当于在配置文件中配置了一个Bean，例如：</p>
+<span id="more"></span>
 
-<p><img data-src="https://typora-1304976013.cos.ap-chongqing.myqcloud.com/img/202307112225777.png" alt="image-20230711222507646"></p>
-<!-- more -->
-
-<h2 id="Component"><a href="#Component" class="headerlink" title="@Component"></a>@Component</h2><p>该注解在类上使用，使用该注解就相当于在配置文件中配置了一个Bean，例如：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component(&quot;userDao&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDaoImpl</span> <span class="keyword">implements</span> <span class="title class_">UserDao</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;UserDaoImpl.save&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>相当于以下内容：</p>
@@ -185,6 +182,7 @@
 <li><strong>@Service：修饰Service层类</strong></li>
 <li><strong>@Repository：修饰Dao层类</strong></li>
 </ul>
+<p><img data-src="https://typora-1304976013.cos.ap-chongqing.myqcloud.com/img/202307112225777.png" alt="image-20230711222507646"></p>
 <h2 id="Value"><a href="#Value" class="headerlink" title="@Value"></a>@Value</h2><p>该注解用于给属性注入值，有2种用法</p>
 <ul>
 <li>如果有set方法，则需要将该注解添加到set方法上</li>
@@ -235,9 +233,9 @@
   <entry>
     <title>ExceptionHandler</title>
     <url>/2023/10/05/ExceptionHandler/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<p>当使用测试  &#x2F;json</p>
+<span id="more"></span>
 
-<p>当使用测试  &#x2F;json</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/json&quot;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="keyword">public</span> ApiResponse <span class="title function_">jsonException</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">JsonException</span>(Status.UNKNOWN_ERROR);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/page&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ModelAndView <span class="title function_">pageException</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">PageException</span>(Status.UNKNOWN_ERROR);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>抛出异常，</p>
