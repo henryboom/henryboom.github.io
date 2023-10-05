@@ -43,7 +43,6 @@
 
 <p><strong>思想是反转资源获取的方向</strong>，传统的资源查找方式要求组件向容器发起请求查找资源。作为回应，容器适时的返回资源。而应用了IOC之后，则是<strong>容器主动的将资源推送给它所管理的组件，组件所要做的仅是选择一种合适的方式来接收资源</strong></p>
 <h2 id="DI-Dependency-Injection"><a href="#DI-Dependency-Injection" class="headerlink" title="DI(Dependency Injection)"></a>DI(Dependency Injection)</h2><p>是IOC的另一种表述方式，即<strong>组件以一些预先定义好的方式(如：getter方法)来接收来自容器的资源注入</strong></p>
-<!-- more -->
 ]]></content>
       <categories>
         <category>后端</category>
@@ -172,6 +171,8 @@
     <content><![CDATA[<span id="more"></span>
 
 <p><img data-src="https://typora-1304976013.cos.ap-chongqing.myqcloud.com/img/202307112225777.png" alt="image-20230711222507646"></p>
+<!-- more -->
+
 <h2 id="Component"><a href="#Component" class="headerlink" title="@Component"></a>@Component</h2><p>该注解在类上使用，使用该注解就相当于在配置文件中配置了一个Bean，例如：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component(&quot;userDao&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDaoImpl</span> <span class="keyword">implements</span> <span class="title class_">UserDao</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;UserDaoImpl.save&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
