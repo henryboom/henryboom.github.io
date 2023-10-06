@@ -255,4 +255,71 @@
         <tag>原理</tag>
       </tags>
   </entry>
+  <entry>
+    <title>session 与 Cookie</title>
+    <url>/2023/10/06/session-%E4%B8%8E-Cookie/</url>
+    <content><![CDATA[<h2 id="Session和Cookie是用于在Web应用中维护用户状态和数据的两种不同机制。"><a href="#Session和Cookie是用于在Web应用中维护用户状态和数据的两种不同机制。" class="headerlink" title="Session和Cookie是用于在Web应用中维护用户状态和数据的两种不同机制。"></a>Session和Cookie是用于在Web应用中维护用户状态和数据的两种不同机制。</h2><ol>
+<li><p><strong>Session</strong>：</p>
+<ul>
+<li><strong>服务器端存储</strong>: Session是在服务器端存储的用户数据，通常存储在服务器的内存或数据库中。</li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li><strong>用户数据</strong>: Session可以用于存储用户的会话数据，例如用户的登录状态、购物车内容等。</li>
+<li><strong>安全性</strong>: 相对较高，因为用户无法直接修改服务器上的Session数据。</li>
+<li><strong>使用方式</strong>: 通常通过在服务器上创建一个唯一的会话标识（Session ID），将该标识存储在Cookie中，然后在服务器上查找与该标识相关联的Session数据。</li>
+<li><strong>过期时间</strong>: 通常可以设置Session的过期时间，以确保会话数据在一段时间内保持有效。</li>
+</ul>
+</li>
+<li><p><strong>Cookie</strong>：</p>
+<ul>
+<li><strong>客户端存储</strong>: Cookie是在客户端（用户浏览器）存储的小段文本数据，通常存储在用户的浏览器中。</li>
+<li><strong>用户数据</strong>: Cookie可以用于存储用户的标识信息，例如用户的登录凭据、首选项等。</li>
+<li><strong>安全性</strong>: 相对较低，因为Cookie数据可以在用户端被查看和修改。</li>
+<li><strong>使用方式</strong>: 服务器可以在HTTP响应中将Cookie发送到客户端，客户端会将Cookie保存，并在以后的HTTP请求中将其发送回服务器。</li>
+<li><strong>过期时间</strong>: 可以设置Cookie的过期时间，有两种类型的Cookie：会话Cookie（在浏览器关闭后自动删除）和持久Cookie（有过期时间）。</li>
+</ul>
+</li>
+</ol>
+<p>关于如何选择Session还是Cookie，取决于具体的需求和使用情况：</p>
+<ul>
+<li>使用Session时，服务器端需要维护会话数据，适用于需要保护用户数据安全的场景，但会增加服务器的负担。</li>
+<li>使用Cookie时，数据存储在客户端，适用于需要在多个请求之间传递数据的场景，但需要注意数据安全性问题。</li>
+</ul>
+<p>通常，这两种机制可以结合使用，例如在Cookie中存储一个Session ID，然后使用Session来存储用户的会话数据。这样可以兼顾数据传递和安全性的需求。</p>
+<h2 id="Session的标识通常存储在Cookie中"><a href="#Session的标识通常存储在Cookie中" class="headerlink" title="Session的标识通常存储在Cookie中"></a>Session的标识通常存储在Cookie中</h2><p>但也可以以其他方式传递，具体取决于应用程序的需求和设计。</p>
+<p>以下是一些传递Session标识的方式：</p>
+<ol>
+<li><p><strong>URL重写</strong>：在URL中包含Session ID。这是一种传递Session标识的基本方式，但不太安全，因为Session ID可能会暴露在URL中，容易被恶意攻击者获取。</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">arduino</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span>example.com/somepage?sessionid=abcdef12345</span><br></pre></td></tr></table></figure>
+
+<p><strong>隐藏表单字段</strong>：将Session ID存储在HTML表单的隐藏字段中。这种方法在表单提交时可以将Session ID传递到服务器，但同样存在安全风险，因为表单可以被修改。</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">html</span><br><span class="line">&lt;input <span class="attribute">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attribute">name</span>=<span class="string">&quot;sessionid&quot;</span> <span class="attribute">value</span>=<span class="string">&quot;abcdef12345&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>HTTP头部</strong>：将Session ID存储在HTTP请求头部中，然后由服务器进行解析和处理。</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">vbnet</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><pre><code>GET /somepage HTTP/1.1
+Host: example.com
+Cookie: sessionid=abcdef12345
+</code></pre>
+</li>
+<li><p><strong>Local Storage</strong>：使用JavaScript将Session ID存储在浏览器的本地存储中（Local Storage），然后在后续请求中通过JavaScript将其添加到请求头部或URL中。</p>
+</li>
+</ol>
+<p>这些方法可以根据具体情况和安全需求进行选择。一般情况下，将Session标识存储在Cookie中是常见且安全的方式。如果需要使用其他方法，务必注意数据的安全性和保密性。</p>
+]]></content>
+      <categories>
+        <category>后端</category>
+        <category>交互</category>
+      </categories>
+      <tags>
+        <tag>原理</tag>
+        <tag>会话</tag>
+      </tags>
+  </entry>
 </search>
