@@ -290,27 +290,22 @@
 <p>通常，这两种机制可以结合使用，例如在Cookie中存储一个Session ID，然后使用Session来存储用户的会话数据。这样可以兼顾数据传递和安全性的需求。</p>
 <h2 id="Session的标识通常存储在Cookie中"><a href="#Session的标识通常存储在Cookie中" class="headerlink" title="Session的标识通常存储在Cookie中"></a>Session的标识通常存储在Cookie中</h2><p>但也可以以其他方式传递，具体取决于应用程序的需求和设计。</p>
 <p>以下是一些传递Session标识的方式：</p>
-<ol>
-<li><p><strong>URL重写</strong>：在URL中包含Session ID。这是一种传递Session标识的基本方式，但不太安全，因为Session ID可能会暴露在URL中，容易被恶意攻击者获取。</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">arduino</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span>example.com/somepage?sessionid=abcdef12345</span><br></pre></td></tr></table></figure>
+<p>1.<strong>URL重写</strong>：在URL中包含Session ID。这是一种传递Session标识的基本方式，但不太安全，因为Session ID可能会暴露在URL中，容易被恶意攻击者获取。</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">arduino</span><br><span class="line">http:<span class="regexp">//</span>example.com/somepage?sessionid=abcdef12345</span><br></pre></td></tr></table></figure>
 
-<p><strong>隐藏表单字段</strong>：将Session ID存储在HTML表单的隐藏字段中。这种方法在表单提交时可以将Session ID传递到服务器，但同样存在安全风险，因为表单可以被修改。</p>
+<p>2.<strong>隐藏表单字段</strong>：将Session ID存储在HTML表单的隐藏字段中。这种方法在表单提交时可以将Session ID传递到服务器，但同样存在安全风险，因为表单可以被修改。</p>
 <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">html</span><br><span class="line">&lt;input <span class="attribute">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attribute">name</span>=<span class="string">&quot;sessionid&quot;</span> <span class="attribute">value</span>=<span class="string">&quot;abcdef12345&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
 
-<p><strong>HTTP头部</strong>：将Session ID存储在HTTP请求头部中，然后由服务器进行解析和处理。</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">vbnet</span></span><br></pre></td></tr></table></figure>
-
+<p>3.<strong>HTTP头部</strong>：将Session ID存储在HTTP请求头部中，然后由服务器进行解析和处理。</p>
 <ol>
-<li><pre><code>GET /somepage HTTP/1.1
+<li><pre><code>vbnet
+GET /somepage HTTP/1.1
 Host: example.com
 Cookie: sessionid=abcdef12345
 </code></pre>
 </li>
-<li><p><strong>Local Storage</strong>：使用JavaScript将Session ID存储在浏览器的本地存储中（Local Storage），然后在后续请求中通过JavaScript将其添加到请求头部或URL中。</p>
-</li>
 </ol>
+<p>4.<strong>Local Storage</strong>：使用JavaScript将Session ID存储在浏览器的本地存储中（Local Storage），然后在后续请求中通过JavaScript将其添加到请求头部或URL中。</p>
 <p>这些方法可以根据具体情况和安全需求进行选择。一般情况下，将Session标识存储在Cookie中是常见且安全的方式。如果需要使用其他方法，务必注意数据的安全性和保密性。</p>
 ]]></content>
       <categories>
