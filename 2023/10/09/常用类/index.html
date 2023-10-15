@@ -21,25 +21,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="今天你干饭了吗？">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Henry&#39;s Blog">
-<meta property="og:url" content="http://example.com/archives/index.html">
+    <meta name="description" content="排序List排序12345678List&lt;Integer&gt; innerList;         Collections.sort(innerList, new Comparator&lt;Integer&gt;() &amp;#123;             @Override             public int compare(Integer o1, Integer o2) &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用类">
+<meta property="og:url" content="http://example.com/2023/10/09/%E5%B8%B8%E7%94%A8%E7%B1%BB/index.html">
 <meta property="og:site_name" content="Henry&#39;s Blog">
-<meta property="og:description" content="今天你干饭了吗？">
+<meta property="og:description" content="排序List排序12345678List&lt;Integer&gt; innerList;         Collections.sort(innerList, new Comparator&lt;Integer&gt;() &amp;#123;             @Override             public int compare(Integer o1, Integer o2) &amp;">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-09T08:03:23.000Z">
+<meta property="article:modified_time" content="2023-10-09T11:34:38.590Z">
 <meta property="article:author" content="Henry">
+<meta property="article:tag" content="原理">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/archives/">
+<link rel="canonical" href="http://example.com/2023/10/09/%E5%B8%B8%E7%94%A8%E7%B1%BB/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"archives/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/10/09/%E5%B8%B8%E7%94%A8%E7%B1%BB/","path":"2023/10/09/常用类/","title":"常用类"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>归档 | Henry's Blog</title>
+<title>常用类 | Henry's Blog</title>
   
 
 
@@ -72,7 +76,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Henry's Blog</h1>
+      <p class="site-title">Henry's Blog</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Code builds world !</p>
@@ -126,7 +130,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -139,6 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List%E6%8E%92%E5%BA%8F"><span class="nav-number">1.1.</span> <span class="nav-text">List排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList%E6%8E%92%E5%BA%8F"><span class="nav-number">1.2.</span> <span class="nav-text">ArrayList排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">String类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#substring-%E6%88%AA%E5%8F%96%E7%9A%84%E6%97%B6%E5%80%99%E4%B8%8D%E5%8C%85%E6%8B%AC%E6%9C%AB%E5%B0%BE%E4%B8%8B%E6%A0%87%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="nav-number">2.1.</span> <span class="nav-text">substring 截取的时候不包括末尾下标的字符</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,232 +224,156 @@
 
     </div>
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 10 篇日志。 继续努力。</span>
-      </div>
 
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/09/%E5%B8%B8%E7%94%A8%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lbxx.jpg">
+      <meta itemprop="name" content="Henry">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Henry's Blog">
+      <meta itemprop="description" content="今天你干饭了吗？">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="常用类 | Henry's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常用类
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
-    </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-10-15T16:02:13+08:00"
-              content="2023-10-15">
-          10-15
-        </time>
-      </div>
+      <time title="创建时间：2023-10-09 16:03:23 / 修改时间：19:34:38" itemprop="dateCreated datePublished" datetime="2023-10-09T16:03:23+08:00">2023-10-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
+        </span>
+    </span>
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/10/15/Vue%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" itemprop="url">
-          <span itemprop="name">Vue基础语法</span>
-        </a>
-      </div>
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>170</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
 
-      
-    </header>
-  </article>
+        </div>
+      </header>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-10-09T16:03:23+08:00"
-              content="2023-10-09">
-          10-09
-        </time>
-      </div>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="List排序"><a href="#List排序" class="headerlink" title="List排序"></a>List排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; innerList;</span><br><span class="line">         Collections.sort(innerList, <span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Integer&gt;() &#123;</span><br><span class="line">             <span class="meta">@Override</span></span><br><span class="line">             <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Integer o1, Integer o2)</span> &#123;</span><br><span class="line">                 <span class="keyword">return</span> o1.compareTo(o2); <span class="comment">// 升序排序</span></span><br><span class="line">                 <span class="comment">// 如果需要降序排序，可以改为 return o2.compareTo(o1);</span></span><br><span class="line">             &#125;</span><br><span class="line">         &#125;;</span><br></pre></td></tr></table></figure>
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/10/09/%E5%B8%B8%E7%94%A8%E7%B1%BB/" itemprop="url">
-          <span itemprop="name">常用类</span>
-        </a>
-      </div>
+<h3 id="ArrayList排序"><a href="#ArrayList排序" class="headerlink" title="ArrayList排序"></a>ArrayList排序</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用 <span class="module-access"><span class="module"><span class="identifier">Collections</span>.</span></span>reverse<span class="constructor">Order()</span></span><br></pre></td></tr></table></figure>
 
-      
-    </header>
-  </article>
+<blockquote>
+<p>使用<code>Collections.reverseOrder()</code>方法来获得一个降序比较器，而不需要创建自定义的比较器。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayListReverseSorting</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;Integer&gt; numbers = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        numbers.add(<span class="number">3</span>);</span><br><span class="line">        numbers.add(<span class="number">1</span>);</span><br><span class="line">        numbers.add(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用降序比较器进行排序</span></span><br><span class="line">        Collections.sort(numbers, Collections.reverseOrder());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Integer number : numbers) &#123;</span><br><span class="line">            System.out.println(number);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-10-06T10:15:48+08:00"
-              content="2023-10-06">
-          10-06
-        </time>
-      </div>
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/10/06/session-%E4%B8%8E-Cookie/" itemprop="url">
-          <span itemprop="name">session 与 Cookie</span>
-        </a>
-      </div>
 
-      
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-10-05T10:09:29+08:00"
-              content="2023-10-05">
-          10-05
-        </time>
-      </div>
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/10/05/ExceptionHandler/" itemprop="url">
-          <span itemprop="name">ExceptionHandler</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-10-04T20:36:36+08:00"
-              content="2023-10-04">
-          10-04
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/10/04/Spring%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" itemprop="url">
-          <span itemprop="name">Spring开发中的常用注解</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-09-26T15:25:42+08:00"
-              content="2023-09-26">
-          09-26
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/09/26/Spring%E9%85%8D%E7%BD%AE/" itemprop="url">
-          <span itemprop="name">Spring配置</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-09-26T15:24:11+08:00"
-              content="2023-09-26">
-          09-26
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/09/26/IOC-%E5%92%8C-DI-%E7%9A%84%E6%A6%82%E8%BF%B0/" itemprop="url">
-          <span itemprop="name">IOC 和 DI 的概述</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-09-26T15:14:19+08:00"
-              content="2023-09-26">
-          09-26
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/09/26/spring/" itemprop="url">
-          <span itemprop="name">spring</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-09-26T09:20:41+08:00"
-              content="2023-09-26">
-          09-26
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/09/26/nas%E8%AE%B0%E5%BD%95/" itemprop="url">
-          <span itemprop="name">nas记录</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2017</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-05-26T12:12:57+08:00"
-              content="2017-05-26">
-          05-26
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2017/05/26/fenlei/" itemprop="url">
-          <span itemprop="name">jQuery对表单的操作及更多应用</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
+<h2 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h2><h3 id="substring-截取的时候不包括末尾下标的字符"><a href="#substring-截取的时候不包括末尾下标的字符" class="headerlink" title="substring 截取的时候不包括末尾下标的字符"></a>substring 截取的时候不包括末尾下标的字符</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">subStr</span> <span class="operator">=</span> str.substring(<span class="number">0</span>, <span class="number">5</span>); <span class="comment">// 从下标0（包括）到下标5（不包括）提取子字符串</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
     </div>
-  </div>
+
+    
+    
+    
+
+    
+<div>
   
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！-------------</div>
+    
+</div>
+
   
-  
+</div>
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8E%9F%E7%90%86/" rel="tag"># 原理</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/06/session-%E4%B8%8E-Cookie/" rel="prev" title="session 与 Cookie">
+                  <i class="fa fa-angle-left"></i> session 与 Cookie
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/15/Vue%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" rel="next" title="Vue基础语法">
+                  Vue基础语法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
 
 </div>
   </main>
