@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>nas记录</title>
-    <url>/2023/09/26/nas%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>stone in categories</p>
-]]></content>
-      <categories>
-        <category>nas</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Centos</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>jQuery对表单的操作及更多应用</title>
-    <url>/2017/05/26/fenlei/</url>
-    <content><![CDATA[<hr>
-<p>打法吴大维</p>
-]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-  </entry>
-  <entry>
     <title>spring</title>
     <url>/2023/09/26/spring/</url>
     <content><![CDATA[]]></content>
@@ -2025,5 +2002,15 @@ Cookie: sessionid=abcdef12345
       <tags>
         <tag>Vue</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>测试minio</title>
+    <url>/2023/10/19/%E6%B5%8B%E8%AF%95minio/</url>
+    <content><![CDATA[<p><img data-src="http://battle.wicp.io:9001/blog1/mxk.png" alt="mxk"></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>测试图床</category>
+      </categories>
   </entry>
 </search>
