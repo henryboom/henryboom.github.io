@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="ssh操作服务器docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="群晖操作记录">
+<meta property="og:url" content="http://example.com/2023/10/19/%E7%BE%A4%E6%99%96%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Henry&#39;s Blog">
+<meta property="og:description" content="ssh操作服务器docker">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202307141007902.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202307141019372.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202308031419235.webp">
+<meta property="og:image" content="https://typora-1304976013.cos.ap-chongqing.myqcloud.com/img/202308031415694.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/6401f0ae9920f1883.jpg_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/6401efc976e5a3287.jpg_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/6401eff2505af4281.jpg_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/6401f03adba5026.jpg_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff766195d008359.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff769daa6c46353.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff794a2d8da6200.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff7984566c98170.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff79aecf4db7695.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff792a1e6009118.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff7a18a58f19296.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff7a368bec63567.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff7bc2b7592555.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff7bd013c218843.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff7be4c71ef6552.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff7bf8ca7223967.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff7c0e42bf71693.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff7c29d9c469413.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff7c366de534040.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff89ee87fed4080.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff7c49c5bd14700.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff7c5c0a1238466.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff83ae6a971556.jpg_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff83bd153788505.jpg_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/63ff8429b00902817.png_e1080.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/%E5%8D%83%E4%B8%8E%E5%8D%83%E5%AF%BB.jpg">
+<meta property="article:published_time" content="2023-10-19T08:53:03.000Z">
+<meta property="article:modified_time" content="2023-10-23T06:55:30.992Z">
+<meta property="article:author" content="Henry">
+<meta property="article:tag" content="群晖">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://battle.wicp.io:9001/blog1/202307141007902.png">
+
+
+<link rel="canonical" href="http://example.com/2023/10/19/%E7%BE%A4%E6%99%96%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/10/19/%E7%BE%A4%E6%99%96%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/","path":"2023/10/19/群晖操作记录/","title":"群晖操作记录"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>群晖操作记录 | Henry's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Henry's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code builds world !</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%9C%E5%83%8F"><span class="nav-number">1.</span> <span class="nav-text">镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E9%95%9C%E5%83%8F"><span class="nav-number">1.1.</span> <span class="nav-text">查看所有镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E5%AE%B9%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">查看所有容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E5%9C%A8%E5%BD%93%E5%89%8D%E7%BB%88%E7%AB%AF%E6%8C%82%E8%BD%BD"><span class="nav-number">2.1.</span> <span class="nav-text">可以在当前终端挂载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E5%AE%B9%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">停止容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8s"><span class="nav-number">2.3.</span> <span class="nav-text">删除容器s</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%B9%E5%99%A8"><span class="nav-number">2.4.</span> <span class="nav-text">使用容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5mysql%E5%AE%B9%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">进入mysql容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9mysql%E5%AE%B9%E5%99%A8%E5%AE%89%E8%A3%85%E5%BF%85%E8%A6%81%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="nav-number">3.1.</span> <span class="nav-text">对mysql容器安装必要的工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%81%E6%AD%A2%E5%A4%96%E7%BD%91ping"><span class="nav-number">3.2.</span> <span class="nav-text">禁止外网ping</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B0%B8%E4%B9%85%E5%92%8C%E4%B8%B4%E6%97%B6%E7%94%9F%E6%95%88%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.1.</span> <span class="nav-text">永久和临时生效方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8Edocker%E5%88%9B%E5%BB%BA%E7%9A%84mysql%E8%BF%9B%E8%A1%8C%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F%E7%9A%84-%E5%8F%96%E6%B6%88"><span class="nav-number">3.3.</span> <span class="nav-text">对于docker创建的mysql进行大小写敏感的 取消</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo-%E5%9C%A8%E7%BE%A4%E6%99%96NAS%E4%B8%8A%E7%9A%84%E9%83%A8%E7%BD%B2"><span class="nav-number"></span> <span class="nav-text">hexo 在群晖NAS上的部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85hexo%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">docker方式安装hexo：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5docker%E5%91%BD%E4%BB%A4%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">进入docker命令环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A9hexo%E8%B7%91%E8%B5%B7%E6%9D%A5"><span class="nav-number">3.</span> <span class="nav-text">让hexo跑起来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0"><span class="nav-number">4.</span> <span class="nav-text">创建第一篇文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%92%8C%E8%A7%A3%E9%87%8A"><span class="nav-number">5.</span> <span class="nav-text">几个常用命令和解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%911%EF%BC%9Ahexo%E5%8A%A0%E8%BD%BD%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">坑1：hexo加载慢的解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A0-%E4%BF%AE%E6%94%B9%E5%AD%97%E4%BD%93%E6%8C%87%E5%90%91%EF%BC%9A"><span class="nav-number">6.1.</span> <span class="nav-text">① 修改字体指向：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A1-JQuery%E6%9B%BF%E6%8D%A2%EF%BC%9A"><span class="nav-number">6.2.</span> <span class="nav-text">② JQuery替换：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%912%EF%BC%9Ahexo%E7%9A%84%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96"><span class="nav-number">7.</span> <span class="nav-text">坑2：hexo的主题美化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A0-%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A"><span class="nav-number">7.1.</span> <span class="nav-text">① 第一步：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A1-%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A"><span class="nav-number">7.2.</span> <span class="nav-text">② 第二步：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A2-%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A"><span class="nav-number">7.3.</span> <span class="nav-text">③ 第三步：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A3-%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A"><span class="nav-number">7.4.</span> <span class="nav-text">④ 第四步：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A4-%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A"><span class="nav-number">7.5.</span> <span class="nav-text">⑤ 第五步：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A5-%E7%AC%AC%E5%85%AD%E6%AD%A5%EF%BC%9A"><span class="nav-number">7.6.</span> <span class="nav-text">⑥ 第六步：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%913%EF%BC%9A%E6%97%B6%E9%97%B4bug"><span class="nav-number">8.</span> <span class="nav-text">坑3：时间bug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%914%EF%BC%9Ahello-world%E7%9A%84%E6%8E%92%E5%BA%8F%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">9.</span> <span class="nav-text">坑4：hello world的排序问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%A7%8B%E7%8A%B6%E6%80%81%EF%BC%9A"><span class="nav-number">10.</span> <span class="nav-text">原始状态：</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Henry"
+      src="/images/lbxx.jpg">
+  <p class="site-author-name" itemprop="name">Henry</p>
+  <div class="site-description" itemprop="description">今天你干饭了吗？</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/henryboom" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;henryboom" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:rstyly233@gmail.com" title="E-Mail → mailto:rstyly233@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelopecustom_file_path fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+<div class="twopeople">
+        <div class="container" style="height:200px;">
+            <canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople1.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/zdog.dist.js"></script>
+        <script id="rendered-js" src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople.js"></script>
+        <style>
+            .twopeople{
+                margin: 0;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            canvas {
+                display: block;
+                margin: 0 auto;
+                cursor: move;
+            }
+        </style>
+      </div>
+​
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/19/%E7%BE%A4%E6%99%96%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lbxx.jpg">
+      <meta itemprop="name" content="Henry">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Henry's Blog">
+      <meta itemprop="description" content="今天你干饭了吗？">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="群晖操作记录 | Henry's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          群晖操作记录
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-19 16:53:03" itemprop="dateCreated datePublished" datetime="2023-10-19T16:53:03+08:00">2023-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-23 14:55:30" itemprop="dateModified" datetime="2023-10-23T14:55:30+08:00">2023-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/nas/" itemprop="url" rel="index"><span itemprop="name">nas</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>16 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>ssh操作服务器docker</p>
+<p> <img data-src="http://battle.wicp.io:9001/blog1/202307141007902.png" alt="image-20230714100750819"></p>
+<span id="more"></span>
+
+<h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h3 id="查看所有镜像"><a href="#查看所有镜像" class="headerlink" title="查看所有镜像"></a>查看所有镜像</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker images</span></span><br></pre></td></tr></table></figure>
+
+<p>会列出当前系统内保存的所有镜像。要获取新镜像资源要通过从docker hub拉取下载得到</p>
+<p>进入docker hub网站后可以找到各种镜像资源，点tag选择合适版本，直接复制命令到窗口拉取镜像。在此界面可以查看dockerfile，里面有该镜像资源所对应的各系统、支持库的版本属性。<br>运行镜像</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -d -p 80(宿主机端口号):80(虚拟机/容器端口号) -it 镜像名 /bin/bash </span><br><span class="line"></span><br><span class="line">docker <span class="built_in">run</span> -d -p 4000:80 -it centos7 /bin/bash </span><br><span class="line">docker <span class="built_in">run</span> -d -p 4000:80 <span class="attribute">--restart</span>=always -w /root -h host <span class="attribute">--privileged</span>=<span class="literal">true</span> --name centos7-hexo centos:centos7.9.2009 </span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>-d 后台运行 （默认创建完容器之后容器的status是退出的）
+
+-p 指定端口
+
+-it (-i 交互模式 -t 支持终端登录)
+
+--name 指定容器名
+</code></pre>
+<p>详细看： docker命令详解（一）：run</p>
+<p>run了一个新镜像时，系统会自动给容器分配一个容器名，建议使用–name选项给容器命名。容器名可以代替冗长的容器id，容器id很长很无厘头，最好给起一个容器名</p>
+<p>如果没有写-d 该容器会直接挂载到当前终端</p>
+<p>为了方便管理，请一定要分配端口号<br>容器</p>
+<h2 id="查看所有容器"><a href="#查看所有容器" class="headerlink" title="查看所有容器"></a>查看所有容器</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -<span class="selector-tag">a</span></span><br></pre></td></tr></table></figure>
+
+<p>会出来一个表，题头分别是</p>
+<p>容器id，镜像名，怎么运行起来的，创建时间，状态，端口，容器名</p>
+<h3 id="可以在当前终端挂载"><a href="#可以在当前终端挂载" class="headerlink" title="可以在当前终端挂载"></a>可以在当前终端挂载</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it -u root [ContainerID] <span class="regexp">/bin/</span>bash</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach container_id </span><br></pre></td></tr></table></figure>
+
+<p>该命令在当前窗口挂载容器，直接进入终端</p>
+<p>如果想退出容器，在容器的终端输入exit即可，此时容器没有停止</p>
+<h3 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop container_id</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除容器s"><a href="#删除容器s" class="headerlink" title="删除容器s"></a>删除容器s</h3><p>删除前先用docker ps  -a 看STATUS属性 先把容器停止运行，再</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">rm</span>  container_id</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用容器"><a href="#使用容器" class="headerlink" title="使用容器"></a>使用容器</h3><p>可以使用attach命令进入一个容器里面，但使用该命令有一个问题。当多个窗口同时使用该命令进入该容器时，所有的窗口都会同步显示。如果有一个窗口阻塞了，那么其他窗口也无法再进行操作。</p>
+<p>attach可以在个人开发时使用，但多人开发推荐使用下面的命令进入容器</p>
+<pre><code>docker ps  
+docker exec -it container_id /bin/bash
+docker exec -it   /bin/bash
+</code></pre>
+<h2 id="进入mysql容器"><a href="#进入mysql容器" class="headerlink" title="进入mysql容器"></a>进入mysql容器</h2><h3 id="对mysql容器安装必要的工具"><a href="#对mysql容器安装必要的工具" class="headerlink" title="对mysql容器安装必要的工具"></a>对mysql容器安装必要的工具</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-<span class="built_in">get</span> update</span><br><span class="line">apt-<span class="built_in">get</span> install net-tools</span><br><span class="line">apt-<span class="built_in">get</span> install vim</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br><span class="line"></span><br><span class="line">docker ps -a</span><br><span class="line"><span class="comment">//选取一个要进入的容器</span></span><br><span class="line">docker exec -it -u root [docker-id] /bin/bash</span><br><span class="line">    </span><br><span class="line"><span class="comment">//这里进入</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<p><img data-src="http://battle.wicp.io:9001/blog1/202307141019372.png" alt="image-20230714101938309"></p>
+<h3 id="禁止外网ping"><a href="#禁止外网ping" class="headerlink" title="禁止外网ping"></a>禁止外网ping</h3><p><strong>一、如果没有iptables禁止ping</strong></p>
+<p>echo1 &gt; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;icmp_echo_igore_all #开启</p>
+<p>echo0 &gt; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;icmp_echo_igore_all #关闭</p>
+<p><strong>二、利用iptables规则禁ping</strong></p>
+<p>iptables -A INPUT -p icmp –icmp-type8 -s 0&#x2F;0 -j DROP</p>
+<p><strong>三、利用iptables规则，禁止服务器向外发包，防止DDOS向外攻击</strong></p>
+<p>iptables -I OUTPUT -p udp –dport 53 -d 8.8.8.8 -j ACCEPT #允许UDP服务IP</p>
+<p>iptables -A OUTPUT -p udp -j DROP #禁止udp服务</p>
+<p>上述53端口和8888是DNS服务必须有的，如果不清楚本机的DNS设置，可执行以下命令得到IP：</p>
+<p>cat&#x2F;etc&#x2F;resolv.conf</p>
+<h4 id="永久和临时生效方法"><a href="#永久和临时生效方法" class="headerlink" title="永久和临时生效方法"></a>永久和临时生效方法</h4><p>临时禁ping</p>
+<p>禁ping，屏蔽主机的ping命令，使别人无法ping你的机器：<br>对这个文件 &#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;icmp_echo_ignore_all，其内容默认为0，意为，允许别人ping你，非0，则起禁ping作用（一般设置为1即可）</p>
+<pre><code>echo 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all
+</code></pre>
+<p>其中，&#x2F;proc 是一种伪文件系统（也即虚拟文件系统），系统内存的映射</p>
+<p>或者使用下面的命令</p>
+<pre><code>sysctl -w net.ipv4.icmp_echo_ignore_all=1
+</code></pre>
+<p>该两种方法会立即生效，但是下次重启时都会会失效<br>补充：sysctl命令</p>
+<p>用于在内核运行时动态地修改内核的运行参数，可用的内核参数在目录&#x2F;proc&#x2F;sys中</p>
+<p>选项：	</p>
+<pre><code>-n：打印值时不打印关键字； 
+-e：忽略未知关键字错误； 
+-N：仅打印名称； 
+-w：当改变sysctl设置时使用此项； 
+-p：从配置文件“/etc/sysctl.conf”加载内核参数设置； 
+-a：打印当前所有可用的内核参数变量和值； 
+-A：以表格方式打印当前所有可用的内核参数变量和值。
+</code></pre>
+<p>永久生效<br>&#x2F;etc&#x2F;sysctl.conf 与 &#x2F;proc&#x2F;sys&#x2F; 的关系简介</p>
+<p>&#x2F;etc&#x2F;sysctl.conf 是系统控制文件，主要是配置一些系统信息，而且它的内容全部是对应于&#x2F;proc&#x2F;sys&#x2F;这个目录的子目录及文件<br>设置方式</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">echo value &gt; <span class="regexp">/proc/</span>sys<span class="regexp">/xx/yy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"></span><br><span class="line">vi <span class="regexp">/etc/</span>sysctl.conf <span class="comment">#vi编辑，然后添加设置 ;  sysctl -p #生效</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"></span><br><span class="line">sysctl -w kernel.domainname=<span class="string">&quot;example.com&quot;</span> <span class="comment">#利用-w生效</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>如何永久生效</p>
+<p>由上，我们将配置信息写入系统控制文件即可<br>首先，在 &#x2F;etc&#x2F;sysctl.conf 中追加配置信息（因为默认未列出）</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">&quot;net.ipv4.icmp_echo_ignore_all=1&quot;</span> &gt;&gt;<span class="regexp">/etc/</span>sysctl.conf</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后，使之生效</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -<span class="selector-tag">p</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>这样就能够禁ping了，如果想修改回去，将值改成0，然后</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -<span class="selector-tag">p</span></span><br></pre></td></tr></table></figure>
+
+<p>一下就回去了</p>
+<h3 id="对于docker创建的mysql进行大小写敏感的-取消"><a href="#对于docker创建的mysql进行大小写敏感的-取消" class="headerlink" title="对于docker创建的mysql进行大小写敏感的 取消"></a>对于docker创建的mysql进行大小写敏感的 取消</h3><p> \1. 登录数据库：mysql -u root -p test;</p>
+<p>  \2. 切换到test库：use test;</p>
+<p>  \3. 查看tables： show tables;</p>
+<p>查看到test库中包含user表，而没有User表，从业务中确认user表即为User表，则mysql数据库开启了大小写区分的功能，可以使用命令查看： </p>
+<p>show variables like ‘lower%’;</p>
+<p><img data-src="http://battle.wicp.io:9001/blog1/202308031419235.webp" alt="img"></p>
+<p>1.文件路径</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root<span class="variable">@mysql8</span><span class="symbol">:/etc/mysql/conf</span>.d<span class="comment"># ls</span></span><br><span class="line">docker.cnf </span><br></pre></td></tr></table></figure>
+
+<p>  \2. 在文件最后增加一行：lower_case_table_names&#x3D;1</p>
+<p>  \3. 保存并退出：:wq!</p>
+<p>  \4. 重启mysql服务：service mysql restart</p>
+ <img data-src="https://typora-1304976013.cos.ap-chongqing.myqcloud.com/img/202308031415694.png" alt="image-20230803141518583" style="zoom:67%;" />
+
+<h1 id="hexo-在群晖NAS上的部署"><a href="#hexo-在群晖NAS上的部署" class="headerlink" title="hexo 在群晖NAS上的部署"></a>hexo 在群晖NAS上的部署</h1><h2 id="docker方式安装hexo："><a href="#docker方式安装hexo：" class="headerlink" title="docker方式安装hexo："></a>docker方式安装hexo：</h2><p>我选择的是 bloodstar&#x2F;hexo这个映像，该docker创建者写了很详细的文档。</p>
+<p>因为最终维护hexo，我希望用obsidian来可视化管理，所以docker文档并不用全看，了解基础的搭建操作就可以了。下面是我的关键帧记录。</p>
+<p>先创建一个共享文件夹docker。如果之前就耍过其它docker，可能早就创建过的。然后在内部创建子文件夹hexo。我是在卷1上创建的，所以最终文件夹就是&#x2F;volume1&#x2F;docker&#x2F;hexo。</p>
+<p>docker是个好东西，懂docker语法的话，复制下面的文字去创建hexo docker容器就超快。（部分参数还是要根据自己的实际运行环境修改一下）</p>
+<p><strong>下拉映像文件：</strong></p>
+<p>docker pull bloodstar&#x2F;hexo</p>
+<p><strong>创建docker：</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker create --name=hexo -e HEXO_SERVER_PORT=<span class="number">3000</span> -v <span class="regexp">/volume1/</span>docker<span class="regexp">/hexo:/</span>app   -p <span class="number">4000</span>:<span class="number">4000</span>   bloodstar/hexo</span><br></pre></td></tr></table></figure>
+
+<p>这段代码发在大妈站，格式可能会被破坏，我截个图做对比。中间行末尾都是一个空格加一个右斜杠。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_5/"><img data-src="http://battle.wicp.io:9001/blog1/6401f0ae9920f1883.jpg_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>不懂docker语法的话，在群晖提供的可视化docker管理面板里手工配置也没问题。这里稍作一点解释，就能明白命令行和可视化之间的对应关系。</p>
+<p>-v 这一行，就是增加一个存储空间。&#x2F;volume1&#x2F;docker&#x2F;hexo 这个路径，前面已经解释过，按实际路径修改。&#x2F;app 是固定值，不要修改。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_6/"><img data-src="http://battle.wicp.io:9001/blog1/6401efc976e5a3287.jpg_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>-e 就是增加环境变量，HEXO_SERVER_PORT那一行，是在指定3000为 hexo server 的端口，和自己配置的其他docker 没有端口冲突就不用修改。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_7/"><img data-src="http://battle.wicp.io:9001/blog1/6401eff2505af4281.jpg_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>-p 这一行，是在指定web方式访问hexo内容的端口，和 HEXO_SERVER_PORT 错开就行了，我用的是4000。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_8/"><img data-src="http://battle.wicp.io:9001/blog1/6401f03adba5026.jpg_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>实际上，这个端口配置最后我也没用到，因为我并没有使用hexo自带的server，而是换用了群晖的web station，运行更稳定，下文有对应讲解。</p>
+<h2 id="进入docker命令环境"><a href="#进入docker命令环境" class="headerlink" title="进入docker命令环境"></a>进入docker命令环境</h2><p>需要用ssh工具连接到群晖NAS，指令和对应解释如下：</p>
+<p><strong>ssh username@NAS_IP</strong><br>【解释】username就是群晖的用户名，NAS_IP就是群晖的局域网地址，例如： ssh <a href="mailto:&#101;&#119;&#101;&#98;&#x75;&#108;&#108;&#x40;&#49;&#55;&#x32;&#x2e;&#50;&#50;&#46;&#48;&#46;&#x32;">&#101;&#119;&#101;&#98;&#x75;&#108;&#108;&#x40;&#49;&#55;&#x32;&#x2e;&#50;&#50;&#46;&#48;&#46;&#x32;</a></p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_9/"><img data-src="http://battle.wicp.io:9001/blog1/63ff766195d008359.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p><strong>sudo -i</strong><br>【解释】登陆成功后再转为root身份</p>
+<p><strong>docker exec -it hexo bash</strong><br>【解释】进入到hexo的命令环境</p>
+<p>如果进入不成功，出现异常信息，需要去docker面板检查，看 hexo docer是否在正常运行。</p>
+<p>ssh 可以用系统自带的命令行工具，也可以自行寻找专用的ssh工具。我的系统是macOS，用到的工具是Termius，相比系统自带终端，最大的好处就是彩色显示，界面更舒服，纯视觉改善，指令输入上并无区别。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_11/"><img data-src="http://battle.wicp.io:9001/blog1/63ff769daa6c46353.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<h2 id="让hexo跑起来"><a href="#让hexo跑起来" class="headerlink" title="让hexo跑起来"></a>让hexo跑起来</h2><p>接着刚才的ssh界面，直接输入</p>
+<p><strong>hexo init</strong><br>【解释】初始化hexo</p>
+<p><strong>hexo g</strong><br>【解释】在web目录下生成静态html文件</p>
+<p>在&#x2F;volume1&#x2F;docker&#x2F;hexo 目录下就会生成hexo的整个框架文件。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_12/"><img data-src="http://battle.wicp.io:9001/blog1/63ff794a2d8da6200.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>看这张图，能理解各目录路径对应的逻辑关系：</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_13/"><img data-src="http://battle.wicp.io:9001/blog1/63ff7984566c98170.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>为了让撰写的文章能像网站一样访问，需要去群晖的套件中心安装web station。篇幅所限，web station的安装方法请自行检索。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_14/"><img data-src="http://battle.wicp.io:9001/blog1/63ff79aecf4db7695.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>创建一个基于端口的虚拟主机，端口号我用的是81，你也可以随意修改，文档根目录指向到 &#x2F;volume1&#x2F;docker&#x2F;hexo&#x2F;public 这个目录。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_15/"><img data-src="http://battle.wicp.io:9001/blog1/63ff792a1e6009118.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>这时候，只要打开浏览器，输入 <a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/">http:&#x2F;&#x2F;你的NAS局域网地址:你的端口</a> 就能看到初始化的hexo网站了。比如我这里，输入的就是 <a target="_blank" rel="noopener" href="http://172.22.0.2:81/">http://172.22.0.2:81</a> 。</p>
+<p><a target="_blank" rel="noopener" href="https://www.smzdm.com/fenlei/zhinengshouji/">手机</a>上也能访问：</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_17/"><img data-src="http://battle.wicp.io:9001/blog1/63ff7a18a58f19296.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>如果你照做到这里，看到的hexo界面会有些区别，是因为我截图的时候已经装了皮肤。皮肤是更深一层的东西，后面再说。</p>
+<p>其实hexo本身也带有一个服务器端，前面创建docker的时候还定义过4000端口。不过我实测下来没有web staton的解析速度快，而且还得用 hexo server 命令手工启动，所以我就改用了web station来做web后端服务。</p>
+<p>如果用hexo server服务的话，访问网址就是<a target="_blank" rel="noopener" href="http://172.22.0.2:4000/">http://172.22.0.2:4000</a> 了，端口不同。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_18/"><img data-src="http://battle.wicp.io:9001/blog1/63ff7a368bec63567.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>这里需要理解一个原理，web station也罢，hexo server也罢，都等于是用群晖NAS做网站服务器，如果你有购买个人服务器和独立域名，当然也可以直接发布到外部服务器上。</p>
+<h2 id="创建第一篇文章"><a href="#创建第一篇文章" class="headerlink" title="创建第一篇文章"></a>创建第一篇文章</h2><p>如果使用hexo命令行方式来创建，那就是</p>
+<p>he new my-first-post</p>
+<p>这时候，定位到群晖的 &#x2F;docker&#x2F;hexo&#x2F;source&#x2F;_posts  目录，就能看到一个 my-firsts-post.md 文件。这个新文件用文本编辑工具打开，内容就三行，一行是标题，一行是生成时间，一行是tags标签，默认留空。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_19/"><img data-src="http://battle.wicp.io:9001/blog1/63ff7bc2b7592555.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>看起来有点复杂，对吧？但是别慌，到这里就只是让大家了解hexo的运行机制，下面就有请obsidian出场了。</p>
+<p>开启obsidian，菜单 File（文件）- Open Vault（打开文档库）</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_20/"><img data-src="http://battle.wicp.io:9001/blog1/63ff7bd013c218843.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>点选打开按钮，弹出窗口里定位到路径 _posts 目录，确认。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_21/"><img data-src="http://battle.wicp.io:9001/blog1/63ff7be4c71ef6552.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>找到刚才创建的第一篇文件，就可以可视化编辑了。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_22/"><img data-src="http://battle.wicp.io:9001/blog1/63ff7bf8ca7223967.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>我来做一下内容修改，帮大家理解各部分文字对应的关系。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_23/"><img data-src="http://battle.wicp.io:9001/blog1/63ff7c0e42bf71693.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>去ssh终端输入生成指令：  <strong>hexo g</strong></p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_24/"><img data-src="http://battle.wicp.io:9001/blog1/63ff7c29d9c469413.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>然后这篇新文章就可以在浏览器里访问了。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_25/"><img data-src="http://battle.wicp.io:9001/blog1/63ff7c366de534040.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>在这个皮肤的支持下，紫色的头图就是我定义的leaf.jpg，左侧还会自动显示阅读进度，以及章节目录。如果你从未接触过这种玩法，肯定会想不到，这么漂亮的界面，就是前面书写的纯文字内容转化而来的。</p>
+<p>今后要创建新文章，重复上述步骤即可。也可以在obsidian里创建新文件，但是要记得把文件头部格式粘贴进去。如果你熟悉obsidian的插件机制，还可以预先创建一个模版，生成新文件的时候自动套用模版，就更方便了。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_26/"><img data-src="http://battle.wicp.io:9001/blog1/63ff89ee87fed4080.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>那几个tag标签，会显示在文章末尾。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_27/"><img data-src="http://battle.wicp.io:9001/blog1/63ff7c49c5bd14700.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>点击任意一个，就能看到同样使用了这个tag的其它序列文章。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_28/"><img data-src="http://battle.wicp.io:9001/blog1/63ff7c5c0a1238466.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<h2 id="几个常用命令和解释"><a href="#几个常用命令和解释" class="headerlink" title="几个常用命令和解释"></a>几个常用命令和解释</h2><p><strong>hexi init</strong></p>
+<p>【解释】初始化hexo站点</p>
+<p><strong>hexo g</strong></p>
+<p>【解释】生成web文件，每次编辑文章后都需要生成一次</p>
+<p><strong>hexo clean</strong></p>
+<p>【解释】清除之前生成的web内容，整目录删除</p>
+<p>init 指令只在开始时用一次。g命令是最常用的。clean命令在更换皮肤或者重大修改是才会用到。</p>
+<p>当然，hexo还有更多指令，不过作为新手，我们暂时用不到，也就不用去深入学习。</p>
+<p>后面的内容是一些坑，我刨了好久才爬出来，写在这里，大家如果遇到同样的问题，就可以少走弯路了。</p>
+<h2 id="坑1：hexo加载慢的解决办法"><a href="#坑1：hexo加载慢的解决办法" class="headerlink" title="坑1：hexo加载慢的解决办法"></a>坑1：hexo加载慢的解决办法</h2><p>如果发现hexo加载特别慢，其原因就是google服务器无法访问的问题，需要修改主题文件里的相关链接。一个是字体链接，一个是jQuery链接。</p>
+<h3 id="①-修改字体指向："><a href="#①-修改字体指向：" class="headerlink" title="① 修改字体指向："></a>① 修改字体指向：</h3><p>hexo目录 &#x2F;themes&#x2F;主题名称&#x2F;layout&#x2F;_partial&#x2F;head.ejs</p>
+<p>将fonts.googleapis.com替换为国内科大的库 <a target="_blank" rel="noopener" href="https://fonts.googleapis.com/">https://fonts.googleapis.com/</a> 或 捷速网络 <a target="_blank" rel="noopener" href="https://fonts.css.network/">https://fonts.css.network/</a></p>
+<h3 id="②-JQuery替换："><a href="#②-JQuery替换：" class="headerlink" title="② JQuery替换："></a>② JQuery替换：</h3><p>hexo目录&#x2F;themes&#x2F;主题名称&#x2F;layout&#x2F;_partial&#x2F;after-footer.ejs</p>
+<p>将 &#x2F;&#x2F;ajax.googleapis.com&#x2F;ajax&#x2F;libs&#x2F;jquery&#x2F;2.0.3&#x2F;jquery.min.js 替换为 &#x2F;&#x2F;code.jquery.com&#x2F;jquery-2.0.3.min.js</p>
+<h2 id="坑2：hexo的主题美化"><a href="#坑2：hexo的主题美化" class="headerlink" title="坑2：hexo的主题美化"></a>坑2：hexo的主题美化</h2><p>Hexo默认主题实在不敢恭维，还是换一个吧。</p>
+<p>网上有很多选择，我选择了PicGO开发者皮蛋大佬设计的一个主题 <strong>hexo-theme-melody</strong> 。</p>
+<p>这个主题的特点是：文章可以自定义头图，翻阅自己的文章就像看杂志，心情特别愉悦；按照标题结构自动生成导航目录，还能展示阅读进步。</p>
+<p>技术大佬的说明书都写得很详尽，直接复制命令执行即可，没有丝毫困扰。手册链接在这里。</p>
+<p><a target="_blank" rel="noopener" href="https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/#%E7%89%B9%E6%80%A7">hexo-theme-melody主题手册</a></p>
+<h3 id="①-第一步："><a href="#①-第一步：" class="headerlink" title="① 第一步："></a>① 第一步：</h3><p>修改_config.yml中的主题设置参数</p>
+<p><strong>theme: melody</strong></p>
+<h3 id="②-第二步："><a href="#②-第二步：" class="headerlink" title="② 第二步："></a>② 第二步：</h3><p>针对Hexo版本大于5.0的情况，只需进入到hexo根目录，然后执行</p>
+<p><strong>npm install hexo-theme-melody</strong></p>
+<h3 id="③-第三步："><a href="#③-第三步：" class="headerlink" title="③ 第三步："></a>③ 第三步：</h3><p>再额外安装2个渲染插件</p>
+<p><strong>npm install hexo-renderer-pug hexo-renderer-stylus</strong></p>
+<h3 id="④-第四步："><a href="#④-第四步：" class="headerlink" title="④ 第四步："></a>④ 第四步：</h3><p>把 &#x2F;&#x2F;node_modules&#x2F;hexo-theme-melody&#x2F;_config.yml 文件的内容copy一份放在&#x2F;&#x2F;_config.melody.yml，完成所有设置。</p>
+<h3 id="⑤-第五步："><a href="#⑤-第五步：" class="headerlink" title="⑤ 第五步："></a>⑤ 第五步：</h3><p>重新生成网站，执行：<br><strong>hexo clean<br>hexo g -d</strong><br>基于hexo的缓存机制，可能刚开始会刷不出主题的变化，稍等再试。我是把上述命令执行了两遍才刷出来。</p>
+<h3 id="⑥-第六步："><a href="#⑥-第六步：" class="headerlink" title="⑥ 第六步："></a>⑥ 第六步：</h3><p>主题如何自定义，手册里都有覆盖。在我看来不难，但是步骤多，需要仔细阅读。</p>
+<p>我重点看了头图的设定，头图一改，页面风格立刻大变。我经过多次测试后得到的经验，头图以1500x900像素为佳，更容易适配<a target="_blank" rel="noopener" href="https://www.smzdm.com/ju/sp4x11p/">电脑</a>和手机的不同分辨率。</p>
+<p>如果选取的图片有视觉焦点，主体应尽量靠上安排。如果无视觉焦点，图片可以随意裁切。举例说明如下：</p>
+<p>有视觉焦点的范例</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_29/"><img data-src="http://battle.wicp.io:9001/blog1/63ff83ae6a971556.jpg_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<p>无视觉焦点的范例</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_30/"><img data-src="http://battle.wicp.io:9001/blog1/63ff83bd153788505.jpg_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<h2 id="坑3：时间bug"><a href="#坑3：时间bug" class="headerlink" title="坑3：时间bug"></a>坑3：时间bug</h2><p>新建post发现时间不对，使用hexo new命令创建的文件，和实际时间差了8个小时。</p>
+<p><strong>解决办法：</strong></p>
+<p>停止hexo这个docker的运行，给它增加环境变量，设置时区 TZ &#x3D; Asia&#x2F;Shanghai。这好像是docker的通病，如果其他docker有时区偏移的故障，都可以如此操作。</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/agqol9zm/pic_31/"><img data-src="http://battle.wicp.io:9001/blog1/63ff8429b00902817.png_e1080.jpg" alt="markdown也变脸，obsidian + hexo 在群晖NAS上的双剑合璧"></a></p>
+<h2 id="坑4：hello-world的排序问题："><a href="#坑4：hello-world的排序问题：" class="headerlink" title="坑4：hello world的排序问题："></a>坑4：hello world的排序问题：</h2><p>hexo在初始化后，会有一篇自带文章hello world，总是排在第一位显示。</p>
+<p>简单的处理方案，当然就是删了它。但是我习惯刨根问底，总要找到真实的原因。</p>
+<p><strong>解决办法：</strong><br>打开对应文件，发现它没有时间戳，给加上时间信息之后，顺序就正常了。<br>反过来，如果希望某篇post置顶，也可以利用这个规则来实现。</p>
+<h2 id="原始状态："><a href="#原始状态：" class="headerlink" title="原始状态："></a>原始状态：</h2><p>title: Hello World<br>date:</p>
+<p><img data-src="http://battle.wicp.io:9001/blog1/%E5%8D%83%E4%B8%8E%E5%8D%83%E5%AF%BB.jpg"></p>
+
+    </div>
+
+    
+    
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"># 群晖</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/19/%E6%B5%8B%E8%AF%95minio/" rel="prev" title="测试minio">
+                  <i class="fa fa-angle-left"></i> 测试minio
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/21/web%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" rel="next" title="web功能测试常用指令">
+                  web功能测试常用指令 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Henry</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">47k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:49</span>
+</div>
+
+
+
+
+<footer class="text-center mt-5 py-3">
+  
+
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("05/27/2023 00:00:00");//此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "已安全运行 "+dnum+" 天";  //此次自定义显示内容
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }  //此次自定义显示内容
+      setInterval("createtime()",250);
+      </script>
+    </div>
+  </div>
+
+</footer>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  
+
+
+  <a target="_blank" rel="noopener" href="https://github.com/henryboom" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+
+
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>

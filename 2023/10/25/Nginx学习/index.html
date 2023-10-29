@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="常见的能够提供web服务的程序有apache、IIS，nginx等，LLS是windows系统中的，nginx和apache是linux系统中的，nginx是一款高性能的http和反向代理的服务器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx学习">
+<meta property="og:url" content="http://example.com/2023/10/25/Nginx%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Henry&#39;s Blog">
+<meta property="og:description" content="常见的能够提供web服务的程序有apache、IIS，nginx等，LLS是windows系统中的，nginx和apache是linux系统中的，nginx是一款高性能的http和反向代理的服务器。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310251652087.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310251713224.webp">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310251113085.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310261012018.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310261012020.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310261012021.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310261012022.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310261012023.webp">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310261012153.webp">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310261022502.jpg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310261025102.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310261025598.jpeg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310261025444.jpeg">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310261025284.jpeg">
+<meta property="article:published_time" content="2023-10-25T02:53:32.000Z">
+<meta property="article:modified_time" content="2023-10-26T02:30:50.937Z">
+<meta property="article:author" content="Henry">
+<meta property="article:tag" content="原理">
+<meta property="article:tag" content="nginx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://battle.wicp.io:9001/blog1/202310251652087.png">
+
+
+<link rel="canonical" href="http://example.com/2023/10/25/Nginx%E5%AD%A6%E4%B9%A0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/10/25/Nginx%E5%AD%A6%E4%B9%A0/","path":"2023/10/25/Nginx学习/","title":"Nginx学习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Nginx学习 | Henry's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Henry's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code builds world !</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">常用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#nginx-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.0.1.</span> <span class="nav-text">nginx 常用命令</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx%E5%92%8Capache%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number"></span> <span class="nav-text">Nginx和apache的对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6"><span class="nav-number"></span> <span class="nav-text">Nginx的事件处理机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx%E5%AE%89%E8%A3%85"><span class="nav-number"></span> <span class="nav-text">Nginx安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number"></span> <span class="nav-text">Nginx目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx%E5%8E%9F%E7%90%86"><span class="nav-number"></span> <span class="nav-text">Nginx原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E5%8D%87%E7%BA%A7"><span class="nav-number"></span> <span class="nav-text">热升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="nav-number"></span> <span class="nav-text">模块化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number"></span> <span class="nav-text">正向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number"></span> <span class="nav-text">反向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number"></span> <span class="nav-text">负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number"></span> <span class="nav-text">HTTP服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB"><span class="nav-number"></span> <span class="nav-text">动静分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A4%E7%89%8C%E6%A1%B6%E9%99%90%E6%B5%81"><span class="nav-number"></span> <span class="nav-text">令牌桶限流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%A1%B6%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">漏桶算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#limit-req-zone-%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">limit_req_zone 参数配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ngx-http-limit-conn-module-%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">ngx_http_limit_conn_module 参数配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">4.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E4%B8%80-%E9%99%90%E5%88%B6%E8%AE%BF%E9%97%AE%E9%80%9F%E7%8E%87"><span class="nav-number">4.1.</span> <span class="nav-text">实例一 限制访问速率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E4%BA%8C-burst%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86"><span class="nav-number">4.2.</span> <span class="nav-text">实例二 burst缓存处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E4%B8%89-nodelay%E9%99%8D%E4%BD%8E%E6%8E%92%E9%98%9F%E6%97%B6%E9%97%B4"><span class="nav-number">4.3.</span> <span class="nav-text">实例三  nodelay降低排队时间</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Henry"
+      src="/images/lbxx.jpg">
+  <p class="site-author-name" itemprop="name">Henry</p>
+  <div class="site-description" itemprop="description">今天你干饭了吗？</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/henryboom" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;henryboom" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:rstyly233@gmail.com" title="E-Mail → mailto:rstyly233@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelopecustom_file_path fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+<div class="twopeople">
+        <div class="container" style="height:200px;">
+            <canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople1.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/zdog.dist.js"></script>
+        <script id="rendered-js" src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople.js"></script>
+        <style>
+            .twopeople{
+                margin: 0;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            canvas {
+                display: block;
+                margin: 0 auto;
+                cursor: move;
+            }
+        </style>
+      </div>
+​
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/25/Nginx%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lbxx.jpg">
+      <meta itemprop="name" content="Henry">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Henry's Blog">
+      <meta itemprop="description" content="今天你干饭了吗？">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Nginx学习 | Henry's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Nginx学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-25 10:53:32" itemprop="dateCreated datePublished" datetime="2023-10-25T10:53:32+08:00">2023-10-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-26 10:30:50" itemprop="dateModified" datetime="2023-10-26T10:30:50+08:00">2023-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>26 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>常见的能够提供web服务的程序有apache、IIS，nginx等，LLS是windows系统中的，nginx和apache是linux系统中的，nginx是一款高性能的http和反向代理的服务器。</p>
+<span id="more"></span>
+
+<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><h5 id="nginx-常用命令"><a href="#nginx-常用命令" class="headerlink" title="nginx 常用命令"></a>nginx 常用命令</h5><p>查看 Nginx 的版本号：nginx -V</p>
+<p>停止 nginx -s stop</p>
+<p>退出 nginx -s quit</p>
+<p>重启加载配置 nginx -s reload</p>
+<p>配置文件启动 nginx -c &lt;&#x2F;path&#x2F;to&#x2F;config&gt; 为 Nginx 指定一个配置文件</p>
+<p>nginx -t 不运行，而仅仅测试配置文件。nginx 将检查配置文件的语法的正确性，并尝试打开配置文件中所引用到的文件。</p>
+<h2 id="Nginx和apache的对比"><a href="#Nginx和apache的对比" class="headerlink" title="Nginx和apache的对比"></a>Nginx和apache的对比</h2><p>　　<strong>·</strong> nginx是<strong>异步</strong>的，apache是<strong>同步阻塞</strong>，在高并发的情况下nginx可以保持高性能。</p>
+<p>　　<strong>·</strong> 对于同样的web服务，nginx更加轻量级，系统资源占用相对少</p>
+<p>　　<strong>·</strong> nginx更容易入门，配置容易，但也相对的apache拥有更多的常用模块，bug更少。</p>
+<p>　　<strong>·</strong> nginx天生支持反向代理负载均衡</p>
+<p>　　总之，如果追求性能，处理静态请求，反向代理就用nginx，追求稳定，处理动态请求就用apache</p>
+<p> ps：nginx使用的就是epoll  io模型，apache使用的是select函数，epoll是linux特有，select能够再大多数操作系统中使用，epoll的优点是处理是类似队列数据结构，select处理的是类似数组的数据结构，epoll只需判断是否为空，select则是轮询，同时select设置了最大操作句柄数为1024，这也导致了nginx在处理静态请求时更优秀。</p>
+<p>ps：静态请求就是对静态文件的操作，基本上不操作数据库的数据，动态请求基本上就是操作数据库数据。</p>
+<h2 id="Nginx的事件处理机制"><a href="#Nginx的事件处理机制" class="headerlink" title="Nginx的事件处理机制"></a>Nginx的事件处理机制</h2><p>​    对于一个基本的web服务器来说，事件通常有三种类型：网络事件、信号、定时器。Nginx采用异步非阻塞的事件处理机制，由进程循环处理多个准备好的事件，从而实现高并发和轻量级。<br>​     以epoll为例：当事件没有准备好时，就放入epoll里面。如果有事件准备好了，那么就去处理；如果事件返回的是EAGAIN，那么继续将其放入epoll里面。从而，只要有事件准备好了，我们就去处理她，只有当所有时间都没有准备好时，才在epoll里面等着。这样，我们就可以并发处理大量的并发了，当然，这里的并发请求，是指未处理完的请求，线程只有一个，所以同时能处理的请求当然只有一个了，只是在请求间进行不断地切换而已，切换也是因为异步事件未准备好，而主动让出的。这里的切换是没有任何代价，你可以理解为循环处理多个准备好的事件，事实上就是这样的。</p>
+<p>Nginx采用worker进程来处理请求，一个worker进程只有一个主线程，那么有多少个worker子进程就能处理多少个并发，那么能够处理的并发数有限。概括的讲，Nginx如何实现高并发？<br>        回答1：采用<strong>异步非阻塞</strong>的事件处理机制。之所以能够并发处理大量的未处理完的请求，是通过异步非阻塞方式，由进程循环处理多个准备好的事件。以epoll为例，为准备好的事件都会放入epoll中，只要有事件准备好，就会进行处理。</p>
+<p>Nginx与Apache对于高并发处理上的区别。<br>        回答3：对于Apache，每个请求都会独占一个工作线程，当并发数到达几千时，就同时有几千的线程在处理请求了。这对于操作系统来说，占用的内存非常大，线程的上下文切换带来的cpu开销也很大，性能就难以上去，同时这些开销是完全没有意义的。</p>
+<pre><code> 对于Nginx来讲，一个进程只有一个主线程，通过异步非阻塞的事件处理机制，实现了循环处理多个准备好的事件，从而实现轻量级和高并发。
+</code></pre>
+<h2 id="Nginx安装"><a href="#Nginx安装" class="headerlink" title="Nginx安装"></a>Nginx安装</h2><p>1.首先更新一下软件包</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo yum update</span></span><br></pre></td></tr></table></figure>
+
+<p>2.安装EPEL存储库：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install epel-release</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>安装Nginx：</li>
+</ol>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum <span class="keyword">install</span> nginx</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>启动Nginx服务：</li>
+</ol>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="literal">start</span> nginx</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>设置Nginx服务自启动：</li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> nginx</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>验证Nginx是否运行：</li>
+</ol>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo systemctl status nginx</span></span><br></pre></td></tr></table></figure>
+
+<p>   如果一切正常，输出应该是“Active: active (running)”或者类似的信息。</p>
+<p><img data-src="http://battle.wicp.io:9001/blog1/202310251652087.png" alt="image-20231025165203202"></p>
+<p>10,检查防火墙，vim打开后，发现SELINUX有三个选项，修改为disabled，永久关闭防火墙。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/selinux<span class="built_in">/config</span></span><br><span class="line"><span class="built_in"></span><span class="attribute">SELINUX</span>=disabled</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginx目录结构"><a href="#Nginx目录结构" class="headerlink" title="Nginx目录结构"></a>Nginx目录结构</h2><p>　<img data-src="http://battle.wicp.io:9001/blog1/202310251713224.webp" alt="cc8b4263fb30dadf7cb06560d08d41a9" style="zoom:67%;" /></p>
+<p>​	　<strong>·</strong> conf是存放ngnix所有配置文件的目录。</p>
+<p>　　<strong>·</strong> html是存放nginx站点的默认目录</p>
+<p>　　<strong>·</strong> sbin存放nginx命令的目录，如之前用的nginx</p>
+<p>　　<strong>·</strong> logs存放日志的默认目录。</p>
+<p>配置文件详解</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">########### 每个指令必须有分号结束。#################</span><br><span class="line">#user administrator administrators;  #配置用户或者组，默认为nobody nobody。</span><br><span class="line">#worker_processes <span class="number">2</span>;  #允许生成的进程数，默认为<span class="number">1</span></span><br><span class="line">#pid /nginx/pid/nginx.<span class="property">pid</span>;   #指定nginx进程运行文件存放地址</span><br><span class="line">error_log log/error.<span class="property">log</span> debug;  #制定日志路径，级别。这个设置可以放入全局块，http块，server块，级别以此为：debug|info|notice|warn|error|crit|alert|emerg</span><br><span class="line">events &#123;</span><br><span class="line">    accept_mutex on;   #设置网路连接序列化，防止惊群现象发生，默认为on</span><br><span class="line">    multi_accept on;  #设置一个进程是否同时接受多个网络连接，默认为off</span><br><span class="line">    #use epoll;      #事件驱动模型，select|poll|kqueue|epoll|resig|<span class="regexp">/dev/</span>poll|eventport</span><br><span class="line">    worker_connections  <span class="number">1024</span>;    #最大连接数，默认为<span class="number">512</span></span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.<span class="property">types</span>;   #文件扩展名与文件类型映射表</span><br><span class="line">    default_type  application/octet-stream; #默认文件类型，默认为text/plain</span><br><span class="line">    #access_log off; #取消服务日志    </span><br><span class="line">    log_format myFormat <span class="string">&#x27;$remote_addr–$remote_user [$time_local] $request $status $body_bytes_sent $http_referer $http_user_agent $http_x_forwarded_for&#x27;</span>; #自定义格式</span><br><span class="line">    access_log log/access.<span class="property">log</span> myFormat;  #combined为日志格式的默认值</span><br><span class="line">    sendfile on;   #允许sendfile方式传输文件，默认为off，可以在http块，server块，location块。</span><br><span class="line">    sendfile_max_chunk 100k;  #每个进程每次调用传输数量不能大于设定的值，默认为<span class="number">0</span>，即不设上限。</span><br><span class="line">    keepalive_timeout <span class="number">65</span>;  #连接超时时间，默认为75s，可以在http，server，location块。</span><br><span class="line"></span><br><span class="line">    upstream mysvr &#123;   </span><br><span class="line">      server <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">7878</span>;</span><br><span class="line">      server <span class="number">192.168</span><span class="number">.10</span><span class="number">.121</span>:<span class="number">3333</span> backup;  #热备</span><br><span class="line">    &#125;</span><br><span class="line">    error_page <span class="number">404</span> <span class="attr">https</span>:<span class="comment">//www.baidu.com; #错误页</span></span><br><span class="line">    server &#123;</span><br><span class="line">        keepalive_requests <span class="number">120</span>; #单连接请求上限次数。</span><br><span class="line">        listen       <span class="number">4545</span>;   #监听端口</span><br><span class="line">        server_name  <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>;   #监听地址       </span><br><span class="line">        location  ~*^.+$ &#123;       #请求的url过滤，正则匹配，~为区分大小写，~*为不区分大小写。</span><br><span class="line">           #root path;  #根目录</span><br><span class="line">           #index vv.<span class="property">txt</span>;  #设置默认页</span><br><span class="line">           proxy_pass  <span class="attr">http</span>:<span class="comment">//mysvr;  #请求转向mysvr 定义的服务器列表</span></span><br><span class="line">           deny <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>;  #拒绝的ip</span><br><span class="line">           allow <span class="number">172.18</span><span class="number">.5</span><span class="number">.54</span>; #允许的ip           </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;   </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>查看 nginx 版本</strong></p>
+<p>输入以下命令：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">nginx -v</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>启动 nginx</strong></p>
+<p>输入以下命令：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo nginx</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>关闭nginx</strong></p>
+<p>输入以下命令：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx -s stop</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们打开之前使用docker创建的centos，随便搞，搞坏了就重新创建镜像，这就是优势。</p>
+<p>啊哈，太久没登录机器，忘记关22了，查看到之前又被觊觎了<br><img data-src="http://battle.wicp.io:9001/blog1/202310251113085.png" alt="image-20231025111301975"></p>
+<h2 id="Nginx原理"><a href="#Nginx原理" class="headerlink" title="Nginx原理"></a>Nginx原理</h2><p>Nginx 服务器启动后，产生一个 Master 进程（Master Process），Master 进程执行一系列工作后产生一个或者多个 Worker 进程（Worker Processes)。 其中，Master 进程用于接收来自外界的信号，并向各 Worker 进程发送信号，同时监控 Worker 进程的工作状态。当 Worker 进程退出后(异常情况下)，Master 进程也会自动重新启动新的 Worker 进程。Worker 进程则是外部请求真正的处理者。</p>
+<blockquote>
+<p>Nginx 在启动后，在系统中会以后台模式（daemon）运行，后台进程包含一个 Master 进程和多个 Worker 进程。我们也可以手动地关掉后台模式，让 Nginx 在前台运行，并且通过配置让 Nginx 取消 Master 进程，从而可以使 Nginx 以单进程方式运行。很显然，生产环境下我们肯定不会这么做，所以关闭后台模式，一般是用来调试用的。Nginx 是以多进程的方式来工作的，当然 Nginx 也是支持多线程的方式的，只是我们主流的方式还是多进程的方式，也是 Nginx 的默认方式。Nginx 采用多进程的方式有诸多好处，本文主要讲解Nginx的多进程模式。</p>
+</blockquote>
+<p>进程模型：</p>
+<p><img data-src="http://battle.wicp.io:9001/blog1/202310261012018.png" alt="image-20231026094137622"></p>
+<h2 id="热升级"><a href="#热升级" class="headerlink" title="热升级"></a><strong>热升级</strong></h2><p>热升级是指在不停止服务的情况下更换 Nginx 的 binary 文件。</p>
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a><strong>模块化</strong></h2><p>Nginx 的内部结构是由内核和一系列的功能模块所组成，高度模块化的设计是 Nginx 的架构基础。内核的设计非常微小和简洁，完成的工作也非常简单。Nginx 的各种功能和操作都由模块来实现，每个模块就是一个功能模块，只负责自身的功能，模块之间严格遵循“高内聚，低耦合”的原则。</p>
+<p>模块从功能上还可以分为以下几种：</p>
+<ul>
+<li>Handlers（处理器模块）：此类模块直接处理请求，并进行输出内容和修改 headers 信息等操作。Handlers 处理器模块一般只能有一个。</li>
+<li>Filters（过滤器模块）：此类模块主要对其他处理器模块输出的内容进行修改操作，最后由 Nginx 输出。</li>
+<li>Proxies（代理类模块）：此类模块是 Nginx 的 HTTP Upstream 之类的模块，这些模块主要与后端一些服务比如 FastCGI 等进行交互，实现服务代理和负载均衡等功能。</li>
+</ul>
+<p><img data-src="http://battle.wicp.io:9001/blog1/202310261012020.png" alt="image-20231026100104750"></p>
+<p>Nginx（内核）本身做的工作实际很少，当它接到一个 HTTP 请求时，它仅仅是通过查找配置文件将此次请求映射到一个 location block，而此 location 中所配置的各个指令则会启动不同的模块去完成工作，因此模块可以看做 Nginx 真正的劳动工作者。通常一个 location 中的指令会涉及一个 Handler 模块和多个 Filter 模块（当然，多个location可以复用同一个模块）。Handler模块负责处理请求，完成响应内容的生成，而 Filter 模块对响应内容进行处理。</p>
+<h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a><strong>正向代理</strong></h2><p>正向代理其实就是说客户端无法主动或者不打算主动去向某服务器发起请求，而是委托了 Nginx 代理服务器去向服务器发起请求，并且获得处理结果，返回给客户端。</p>
+<p><img data-src="http://battle.wicp.io:9001/blog1/202310261012021.png" alt="image-20231026100153107"></p>
+<p>VPN 的原理大体上也类似于一个正向代理，也就是需要访问外网的电脑，发起一个访问外网的请求，通过本机上的 VPN 去寻找一个可以访问国外网站的代理服务器，代理服务器向外国网站发起请求，然后把结果返回给本机。</p>
+<p>正向代理配置实例：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">resolver</span> <span class="number">114.114.114.114</span> <span class="number">8.8.8.8</span>;</span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">resolver_timeout</span> <span class="number">5s</span>;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">81</span>;</span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">                <span class="attribute">proxy_pass</span> http://<span class="variable">$host</span><span class="variable">$request_uri</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>resolver 是配置正向代理的 DNS 服务器，listen 是正向代理的端口，配置好了就可以在浏览器上面或者其他代理插件上面使用服务器 ip + 端口号进行代理了。</p>
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a><strong>反向代理</strong></h2><p>反向代理（ Reverse Proxy ）方式是指以代理服务器来接受 internet 上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给 internet 上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。正向代理在客户端侧，反向代理在服务端侧。</p>
+<p>这里典型的就是Nginx了</p>
+<p><img data-src="http://battle.wicp.io:9001/blog1/202310261012022.png" alt="image-20231026100325965"></p>
+<p>这里用户时向代理服务器发起的请求，nginx像是服务器的“传话筒”，但是他在接受和转发过程中还进行了一系列的操作，比如高并发和限流的实现。</p>
+<p>真实的服务器不能直接被外部网络访问，所以需要一台代理服务器，而代理服务器能被外部网络访问的同时又跟真实服务器在同一个网络环境，当然也可能是同一台服务器，端口不同而已。 下面贴上一段简单的实现反向代理的配置：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;  </span><br><span class="line">      <span class="attribute">listen</span>      <span class="number">80</span>;                                                       </span><br><span class="line">      <span class="attribute">server_name</span>  localhost;                                              </span><br><span class="line">      <span class="section">location</span> / &#123;</span><br><span class="line">          <span class="attribute">proxy_pass</span> http://www.google.com;</span><br><span class="line"></span><br><span class="line">          <span class="attribute">proxy_set_header</span> Host <span class="variable">$http_host</span>;        </span><br><span class="line">          <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>; <span class="comment">#获取客户端真实IP</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>保存配置文件后启动 Nginx，这样当我们访问 <a href="https://link.juejin.cn/?target=http://localhost">http://localhost</a> 的时候，就相当于访问 <a href="https://link.juejin.cn/?target=http://www.google.com">www.google.com</a> 了。</p>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a><strong>负载均衡</strong></h2><p>负载均衡其意思就是分摊到多个操作单元上进行执行，例如：Web 服务器、FTP 服务器、企业关键应用服务器和其它关键任务服务器等，从而共同完成工作任务。简单而言就是当有2台或以上服务器时，根据规则将请求分发到指定的服务器上处理，负载均衡配置一般都需要同时配置反向代理，通过反向代理跳转到负载均衡。</p>
+<p>而 Nginx 目前支持自带 3 种负载均衡策略，还有 2 种常用的第三方策略：</p>
+<ol>
+<li>轮询（RR）：默认的策略。每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器宕掉，能自动剔除。</li>
+<li>权重（weight）：可以给不同的后端服务器设置一个权重值（weight），用于调整不同的服务器上请求的分配率。权重数据越大，被分配到请求的几率越大；该权重值，主要是针对实际工作环境中不同的后端服务器硬件配置进行调整的。</li>
+<li>ip_hash：每个请求按照发起客户端的 ip 的 hash 结果进行匹配，这样的算法下一个固定 ip 地址的客户端总会访问到同一个后端服务器，这也在一定程度上解决了集群部署环境下 Session 共享的问题。</li>
+<li>fair：智能调整调度算法，动态的根据后端服务器的请求处理到响应的时间进行均衡分配。响应时间短处理效率高的服务器分配到请求的概率高，响应时间长处理效率低的服务器分配到的请求少。Nginx 默认不支持 fair 算法，如果要使用这种调度算法，请安装 upstream_fair 模块。</li>
+<li>url_hash：按照访问的 URL 的 hash 结果分配请求，每个请求的 URL 会指向后端固定的某个服务器，可以在 Nginx 作为静态服务器的情况下提高缓存效率，示例如下。同样要注意 Nginx 默认不支持这种调度算法，要使用的话需要安装 Nginx 的 hash 软件包。</li>
+</ol>
+<p>将原先请求集中到单个服务器上的情况改为增加服务器的数量，然后将请求分发到各个服务器上，将负载分发到不同的服务器，即负载均衡。</p>
+<p><img data-src="http://battle.wicp.io:9001/blog1/202310261012023.webp" alt="16f891ba0cfac73d~tplv-t2oaga2asx-jj-mark 3024 0 0 0 q75"></p>
+<p>Nginx 支持同时设置多组的负载均衡，用来给不同的 server 来使用。与此同时，upstream可以设定每个后端服务器在负载均衡调度中的状态，相关配置示例如下：</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">upstream <span class="meta">#自定义组名 &#123;</span></span><br><span class="line">    <span class="keyword">server</span> x1.google.com;    <span class="meta">#可以是域名</span></span><br><span class="line">    <span class="keyword">server</span> x2.google.com;</span><br><span class="line">    <span class="meta">#server x3.google.com</span></span><br><span class="line">                            <span class="meta">#down         不参与负载均衡</span></span><br><span class="line">                            <span class="meta">#weight=5;    权重，越高分配越多</span></span><br><span class="line">                            <span class="meta">#backup;      预留的备份服务器</span></span><br><span class="line">                            <span class="meta">#max_fails    允许失败的次数</span></span><br><span class="line">                            <span class="meta">#fail_timeout 超过失败次数后，服务暂停时间</span></span><br><span class="line">                            <span class="meta">#max_coons    限制最大的接受的连接数</span></span><br><span class="line">                            <span class="meta">#根据服务器性能不同，配置适合的参数</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">#server 106.xx.xx.xxx;        可以是ip</span></span><br><span class="line">    <span class="meta">#server 106.xx.xx.xxx:8080;   可以带端口号</span></span><br><span class="line">    <span class="meta">#server unix:/tmp/xxx;        支出socket方式</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>实现效果：</strong><br>  在浏览器地址栏输入 <em><a href="https://link.juejin.cn/?target=http://192.168.4.32/example/a.html">http://192.168.4.32/example/a.html</a></em> ，平均到 5000 和 8080 端口中，实现负载均衡效果。<br> <strong>具体配置：</strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="section">upstream</span> myserver &#123;   </span><br><span class="line">  <span class="attribute">server</span> <span class="number">192.167.4.32:5000</span>;</span><br><span class="line">  <span class="attribute">server</span> <span class="number">192.168.4.32:8080</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;   <span class="comment">#监听端口</span></span><br><span class="line">    <span class="attribute">server_name</span>  <span class="number">192.168.4.32</span>;   <span class="comment">#监听地址</span></span><br><span class="line">   </span><br><span class="line">    <span class="section">location</span>  / &#123;       </span><br><span class="line">       <span class="attribute">root</span> html;  <span class="comment">#html目录</span></span><br><span class="line">       <span class="attribute">index</span> index.html index.htm;  <span class="comment">#设置默认页</span></span><br><span class="line">       <span class="attribute">proxy_pass</span>  http://myserver;  <span class="comment">#请求转向 myserver 定义的服务器列表      </span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="HTTP服务器"><a href="#HTTP服务器" class="headerlink" title="HTTP服务器"></a><strong>HTTP服务器</strong></h2><p>Nginx 本身也是一个<strong>静态资源</strong>的服务器，当只有静态资源的时候，就可以使用 Nginx 来做服务器，同时现在也很流行动静分离，就可以通过 Nginx 来实现，首先看看 Nginx 做静态资源服务器。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>      <span class="number">80</span>;                                                       </span><br><span class="line">    <span class="attribute">server_name</span>  localhost;                                         </span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">            <span class="attribute">root</span>  /root/website/;</span><br><span class="line">            <span class="attribute">index</span>  index.html;</span><br><span class="line">        &#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这样如果访问 <a href="https://link.juejin.cn/?target=http://localhost">http://localhost</a> 就会默认访问到 &#x2F;root&#x2F;website&#x2F; 目录下面的 index.html，如果一个网站只是静态页面的话，那么就可以通过这种方式来实现部署。</p>
+<h2 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a><strong>动静分离</strong></h2><p>动静分离是让动态网站里的动态网页根据一定规则把不变的资源和经常变的资源区分开来，动静资源做好了拆分以后，我们就可以根据静态资源的特点将其做缓存操作，这就是网站静态化处理的核心思路。</p>
+<p><img data-src="http://battle.wicp.io:9001/blog1/202310261012153.webp" alt="16f891ba0cc0c4bd~tplv-t2oaga2asx-jj-mark 3024 0 0 0 q75"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">upstream dynamic_server&#123;  </span><br><span class="line">      server <span class="number">192.168</span><span class="number">.0</span><span class="number">.2</span>:<span class="number">8080</span>;  </span><br><span class="line">      server <span class="number">192.168</span><span class="number">.0</span><span class="number">.3</span>:<span class="number">8081</span>;  </span><br><span class="line">  &#125; </span><br><span class="line">  server &#123;  </span><br><span class="line">      listen      <span class="number">80</span>;  </span><br><span class="line">      server_name  localhost; </span><br><span class="line">      location / &#123;  </span><br><span class="line">          root   /root/website/;</span><br><span class="line">          index  index.<span class="property">html</span>;  </span><br><span class="line">      &#125; </span><br><span class="line">      # 所有静态请求都由nginx处理，存放目录为html  </span><br><span class="line">      location ~ .(gif|jpg|jpeg|png|bmp|swf|css|js)$ &#123;  </span><br><span class="line">          root     /root/website/;</span><br><span class="line">      &#125; </span><br><span class="line">      # 所有动态请求都转发给tomcat处理  </span><br><span class="line">      location ~ .(jsp|<span class="keyword">do</span>)$ &#123;  </span><br><span class="line">          proxy_pass  <span class="attr">http</span>:<span class="comment">//dynamic_server; </span></span><br><span class="line">      &#125; </span><br><span class="line">      error_page  <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /50x.<span class="property">html</span>;  </span><br><span class="line">      location = /50x.<span class="property">html</span> &#123;  </span><br><span class="line">          root  /root/website/;</span><br><span class="line">      &#125;  </span><br><span class="line">  &#125;  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这样我们就可以把 html、图片、css、js等放到 &#x2F;root&#x2F;website&#x2F; 目录下，而 Tomcat 只负责处理 jsp 和请求。例如当我们后缀为 gif 的时候，Nginx 默认会从 &#x2F;root&#x2F;website&#x2F; 获取到当前请求的动态图文件返回，当然这里的静态文件跟 Nginx 是同一台服务器。我们也可以在另外一台服务器，然后通过反向代理和负载均衡配置过去就好了。只要搞清楚了最基本的流程，很多配置就很简单了，另外 localtion 后面其实是一个正则表达式，所以非常灵活。</p>
+<h2 id="令牌桶限流"><a href="#令牌桶限流" class="headerlink" title="令牌桶限流"></a>令牌桶限流</h2><p><img data-src="http://battle.wicp.io:9001/blog1/202310261022502.jpg" alt="802666-20180502140242681-53841293"></p>
+<p>算法思想是：</p>
+<ul>
+<li>令牌以固定速率产生，并缓存到令牌桶中；</li>
+<li>令牌桶放满时，多余的令牌被丢弃；</li>
+<li>请求要消耗等比例的令牌才能被处理；</li>
+<li>令牌不够时，请求被缓存。</li>
+</ul>
+<h3 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法"></a>漏桶算法</h3><p><img data-src="http://battle.wicp.io:9001/blog1/202310261025102.png" alt="漏桶算法"></p>
+<p>算法思想是：</p>
+<ul>
+<li>水（请求）从上方倒入水桶，从水桶下方流出（被处理）；</li>
+<li>来不及流出的水存在水桶中（缓冲），以固定速率流出；</li>
+<li>水桶满后水溢出（丢弃）。</li>
+<li>这个算法的核心是：缓存请求、匀速处理、多余的请求直接丢弃。<br> 相比漏桶算法，令牌桶算法不同之处在于它不但有一只“桶”，还有个队列，这个桶是用来存放令牌的，队列才是用来存放请求的。</li>
+</ul>
+<p>从作用上来说，漏桶和令牌桶算法最明显的区别就是是否允许突发流量(burst)的处理，漏桶算法能够强行限制数据的实时传输（处理）速率，对突发流量不做额外处理；而令牌桶算法能够在限制数据的平均传输速率的同时允许某种程度的突发传输。</p>
+<p>Nginx按请求速率限速模块使用的是漏桶算法，即能够强行保证请求的实时处理速度不会超过设置的阈值。</p>
+<p>Nginx官方版本限制IP的连接和并发分别有两个模块：</p>
+<ul>
+<li><code>limit_req_zone</code> 用来限制单位时间内的请求数，即速率限制,采用的漏桶算法 “leaky bucket”。</li>
+<li><code>limit_req_conn</code> 用来限制同一时间连接数，即并发限制。</li>
+</ul>
+<h3 id="limit-req-zone-参数配置"><a href="#limit-req-zone-参数配置" class="headerlink" title="limit_req_zone 参数配置"></a>limit_req_zone 参数配置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	limit_req zone=name [burst=number] [nodelay];</span><br><span class="line">Default:	—</span><br><span class="line">Context:	http, server, location</span><br><span class="line">limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一个参数：$binary_remote_addr 表示通过remote_addr这个标识来做限制，“binary_”的目的是缩写内存占用量，是限制同一客户端ip地址。</li>
+<li>第二个参数：zone&#x3D;one:10m表示生成一个大小为10M，名字为one的内存区域，用来存储访问的频次信息。</li>
+<li>第三个参数：rate&#x3D;1r&#x2F;s表示允许相同标识的客户端的访问频次，这里限制的是每秒1次，还可以有比如30r&#x2F;m的。</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">limit_req <span class="attribute">zone</span>=one <span class="attribute">burst</span>=5 nodelay;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一个参数：zone&#x3D;one 设置使用哪个配置区域来做限制，与上面limit_req_zone 里的name对应。</li>
+<li>第二个参数：burst&#x3D;5，重点说明一下这个配置，burst爆发的意思，这个配置的意思是设置一个大小为5的缓冲区当有大量请求（爆发）过来时，超过了访问频次限制的请求可以先放到这个缓冲区内。</li>
+<li>第三个参数：nodelay，如果设置，超过访问频次而且缓冲区也满了的时候就会直接返回503，如果没有设置，则所有请求会等待排队。</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;</span><br><span class="line">    server &#123;</span><br><span class="line">        location /search/ &#123;</span><br><span class="line">            limit_req zone=one burst=5 nodelay;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;        </span><br></pre></td></tr></table></figure>
+
+<p>下面配置可以限制特定UA（比如搜索引擎）的访问：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">limit_req_zone  $anti_spider  zone=one:10m   rate=10r/s;</span><br><span class="line">limit_req zone=one burst=100 nodelay;</span><br><span class="line">if ($http_user_agent ~* &quot;googlebot|bingbot|Feedfetcher-Google&quot;) &#123;</span><br><span class="line">    set $anti_spider $http_user_agent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其他参数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	limit_req_log_level info | notice | warn | error;</span><br><span class="line">Default:	</span><br><span class="line">limit_req_log_level error;</span><br><span class="line">Context:	http, server, location</span><br></pre></td></tr></table></figure>
+
+<p>当服务器由于limit被限速或缓存时，配置写入日志。延迟的记录比拒绝的记录低一个级别。例子：<code>limit_req_log_level notice</code>延迟的的基本是info。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	limit_req_status code;</span><br><span class="line">Default:	</span><br><span class="line">limit_req_status 503;</span><br><span class="line">Context:	http, server, location</span><br></pre></td></tr></table></figure>
+
+<p>设置拒绝请求的返回值。值只能设置 400 到 599 之间。</p>
+<h3 id="ngx-http-limit-conn-module-参数配置"><a href="#ngx-http-limit-conn-module-参数配置" class="headerlink" title="ngx_http_limit_conn_module 参数配置"></a>ngx_http_limit_conn_module 参数配置</h3><p>这个模块用来限制单个IP的请求数。并非所有的连接都被计数。只有在服务器处理了请求并且已经读取了整个请求头时，连接才被计数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	limit_conn zone number;</span><br><span class="line">Default:	—</span><br><span class="line">Context:	http, server, location</span><br><span class="line">limit_conn_zone $binary_remote_addr zone=addr:10m;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    location /download/ &#123;</span><br><span class="line">        limit_conn addr 1;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>一次只允许每个IP地址一个连接。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">limit_conn_zone $binary_remote_addr zone=perip:10m;</span><br><span class="line">limit_conn_zone $server_name zone=perserver:10m;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    ...</span><br><span class="line">    limit_conn perip 10;</span><br><span class="line">    limit_conn perserver 100;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以配置多个limit_conn指令。例如，以上配置将限制每个客户端IP连接到服务器的数量，同时限制连接到虚拟服务器的总数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	limit_conn_zone key zone=name:size;</span><br><span class="line">Default:	—</span><br><span class="line">Context:	http</span><br><span class="line">limit_conn_zone $binary_remote_addr zone=addr:10m;</span><br></pre></td></tr></table></figure>
+
+<p>在这里，客户端IP地址作为关键。请注意，不是<code>$ remote_addr</code>，而是使用<code>$ binary_remote_addr</code>变量。 <code>$ remote_addr</code>变量的大小可以从7到15个字节不等。存储的状态在32位平台上占用32或64字节的内存，在64位平台上总是占用64字节。对于IPv4地址，<code>$ binary_remote_addr</code>变量的大小始终为4个字节，对于IPv6地址则为16个字节。存储状态在32位平台上始终占用32或64个字节，在64位平台上占用64个字节。一个兆字节的区域可以保持大约32000个32字节的状态或大约16000个64字节的状态。如果区域存储耗尽，服务器会将错误返回给所有其他请求。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	limit_conn_log_level info | notice | warn | error;</span><br><span class="line">Default:	</span><br><span class="line">limit_conn_log_level error;</span><br><span class="line">Context:	http, server, location</span><br></pre></td></tr></table></figure>
+
+<p>当服务器限制连接数时，设置所需的日志记录级别。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	limit_conn_status code;</span><br><span class="line">Default:	</span><br><span class="line">limit_conn_status 503;</span><br><span class="line">Context:	http, server, location</span><br></pre></td></tr></table></figure>
+
+<p>设置拒绝请求的返回值。</p>
+<h3 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h3><h4 id="实例一-限制访问速率"><a href="#实例一-限制访问速率" class="headerlink" title="实例一 限制访问速率"></a>实例一 限制访问速率</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">limit_req_zone $binary_remote_addr zone=mylimit:10m rate=2r/s;</span><br><span class="line">server &#123; </span><br><span class="line">    location / &#123; </span><br><span class="line">        limit_req zone=mylimit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述规则限制了每个IP访问的速度为2r&#x2F;s，并将该规则作用于根目录。如果单个IP在非常短的时间内并发发送多个请求，结果会怎样呢？<br> <img data-src="http://battle.wicp.io:9001/blog1/202310261025598.jpeg" alt="单个IP 10ms内发送6个请求"></p>
+<p>我们使用单个IP在10ms内发并发送了6个请求，只有1个成功，剩下的5个都被拒绝。我们设置的速度是2r&#x2F;s，为什么只有1个成功呢，是不是Nginx限制错了？当然不是，是因为Nginx的限流统计是基于毫秒的，我们设置的速度是2r&#x2F;s，转换一下就是500ms内单个IP只允许通过1个请求，从501ms开始才允许通过第二个请求。</p>
+<h4 id="实例二-burst缓存处理"><a href="#实例二-burst缓存处理" class="headerlink" title="实例二 burst缓存处理"></a>实例二 burst缓存处理</h4><p>我们看到，我们短时间内发送了大量请求，Nginx按照毫秒级精度统计，超出限制的请求直接拒绝。这在实际场景中未免过于苛刻，真实网络环境中请求到来不是匀速的，很可能有请求“突发”的情况，也就是“一股子一股子”的。Nginx考虑到了这种情况，可以通过burst关键字开启对突发请求的缓存处理，而不是直接拒绝。<br> 来看我们的配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">limit_req_zone $binary_remote_addr zone=mylimit:10m rate=2r/s;</span><br><span class="line">server &#123; </span><br><span class="line">    location / &#123; </span><br><span class="line">        limit_req zone=mylimit burst=4;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们加入了burst&#x3D;4，意思是每个key(此处是每个IP)最多允许4个突发请求的到来。如果单个IP在10ms内发送6个请求，结果会怎样呢？<br> <img data-src="http://battle.wicp.io:9001/blog1/202310261025444.jpeg" alt="设置burst"></p>
+<p>相比实例一成功数增加了4个，这个我们设置的burst数目是一致的。具体处理流程是：1个请求被立即处理，4个请求被放到burst队列里，另外一个请求被拒绝。通过burst参数，我们使得Nginx限流具备了缓存处理突发流量的能力。</p>
+<p>但是请注意：burst的作用是让多余的请求可以先放到队列里，慢慢处理。如果不加nodelay参数，队列里的请求不会立即处理，而是按照rate设置的速度，以毫秒级精确的速度慢慢处理。</p>
+<h4 id="实例三-nodelay降低排队时间"><a href="#实例三-nodelay降低排队时间" class="headerlink" title="实例三  nodelay降低排队时间"></a>实例三  nodelay降低排队时间</h4><p>实例二中我们看到，通过设置burst参数，我们可以允许Nginx缓存处理一定程度的突发，多余的请求可以先放到队列里，慢慢处理，这起到了平滑流量的作用。但是如果队列设置的比较大，请求排队的时间就会比较长，用户角度看来就是RT变长了，这对用户很不友好。有什么解决办法呢？nodelay参数允许请求在排队的时候就立即被处理，也就是说只要请求能够进入burst队列，就会立即被后台worker处理，请注意，这意味着burst设置了nodelay时，系统瞬间的QPS可能会超过rate设置的阈值。nodelay参数要跟burst一起使用才有作用。</p>
+<p>延续实例二的配置，我们加入nodelay选项：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">limit_req_zone $binary_remote_addr zone=mylimit:10m rate=2r/s;</span><br><span class="line">server &#123; </span><br><span class="line">    location / &#123; </span><br><span class="line">        limit_req zone=mylimit burst=4 nodelay;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>单个IP 10ms内并发发送6个请求，结果如下：<br> <img data-src="http://battle.wicp.io:9001/blog1/202310261025284.jpeg" alt="设置burst和nodela"></p>
+<p>跟实例二相比，请求成功率没变化，但是总体耗时变短了。这怎么解释呢？实例二中，有4个请求被放到burst队列当中，工作进程每隔500ms(rate&#x3D;2r&#x2F;s)取一个请求进行处理，最后一个请求要排队2s才会被处理；实例三中，请求放入队列跟实例二是一样的，但不同的是，队列中的请求同时具有了被处理的资格，所以实例三中的5个请求可以说是同时开始被处理的，花费时间自然变短了。</p>
+<p>但是请注意，虽然设置burst和nodelay能够降低突发请求的处理时间，但是长期来看并不会提高吞吐量的上限，长期吞吐量的上限是由rate决定的，因为nodelay只能保证burst的请求被立即处理，但Nginx会限制队列元素释放的速度，就像是限制了令牌桶中令牌产生的速度。</p>
+<p>看到这里你可能会问，加入了nodelay参数之后的限速算法，到底算是哪一个“桶”，是漏桶算法还是令牌桶算法？当然还算是漏桶算法。考虑一种情况，令牌桶算法的token为耗尽时会怎么做呢？由于它有一个请求队列，所以会把接下来的请求缓存下来，缓存多少受限于队列大小。但此时缓存这些请求还有意义吗？如果server已经过载，缓存队列越来越长，RT越来越高，即使过了很久请求被处理了，对用户来说也没什么价值了。所以当token不够用时，最明智的做法就是直接拒绝用户的请求，这就成了漏桶算法。</p>
+
+    </div>
+
+    
+    
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8E%9F%E7%90%86/" rel="tag"># 原理</a>
+              <a href="/tags/nginx/" rel="tag"># nginx</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/25/%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83/" rel="prev" title="订阅与发布">
+                  <i class="fa fa-angle-left"></i> 订阅与发布
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/25/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="next" title="单例模式">
+                  单例模式 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Henry</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">47k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:49</span>
+</div>
+
+
+
+
+<footer class="text-center mt-5 py-3">
+  
+
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("05/27/2023 00:00:00");//此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "已安全运行 "+dnum+" 天";  //此次自定义显示内容
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }  //此次自定义显示内容
+      setInterval("createtime()",250);
+      </script>
+    </div>
+  </div>
+
+</footer>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  
+
+
+  <a target="_blank" rel="noopener" href="https://github.com/henryboom" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+
+
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>

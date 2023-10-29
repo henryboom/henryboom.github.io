@@ -21,17 +21,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="article">
+    <meta name="description" content="1.minio+PicGo自建图床使用docker拉取最新的镜像 1docker pull minio&#x2F;minio">
+<meta property="og:type" content="article">
 <meta property="og:title" content="测试minio">
 <meta property="og:url" content="http://example.com/2023/10/19/%E6%B5%8B%E8%AF%95minio/index.html">
 <meta property="og:site_name" content="Henry&#39;s Blog">
+<meta property="og:description" content="1.minio+PicGo自建图床使用docker拉取最新的镜像 1docker pull minio&#x2F;minio">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://battle.wicp.io:9001/blog1/mxk.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/image-20231019161545783.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/image-20231019161727230.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/image-20231019161817172.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/image-20231019161903905.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/image-20231019161944574.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/3c39a82910908a03c112857e30f54e1c.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/image-20231019162104415.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/image-20231019162118827.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/image-20231019162219985.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/image-20231019162219985.png">
 <meta property="article:published_time" content="2023-10-19T02:48:35.000Z">
-<meta property="article:modified_time" content="2023-10-19T02:49:44.567Z">
+<meta property="article:modified_time" content="2023-10-24T09:07:31.235Z">
 <meta property="article:author" content="Henry">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://battle.wicp.io:9001/blog1/mxk.png">
+<meta name="twitter:image" content="http://battle.wicp.io:9001/blog1/image-20231019161545783.png">
 
 
 <link rel="canonical" href="http://example.com/2023/10/19/%E6%B5%8B%E8%AF%95minio/">
@@ -128,7 +139,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -141,6 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-minio-PicGo%E8%87%AA%E5%BB%BA%E5%9B%BE%E5%BA%8A"><span class="nav-number">1.</span> <span class="nav-text">1.minio+PicGo自建图床</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">2.初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AEMinIO"><span class="nav-number">3.</span> <span class="nav-text">3.配置MinIO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%85%8D%E7%BD%AEpicgo"><span class="nav-number">4.</span> <span class="nav-text">4.配置picgo</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -155,18 +167,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -260,9 +272,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-10-19 10:48:35 / 修改时间：10:49:44" itemprop="dateCreated datePublished" datetime="2023-10-19T10:48:35+08:00">2023-10-19</time>
+      <time title="创建时间：2023-10-19 10:48:35" itemprop="dateCreated datePublished" datetime="2023-10-19T10:48:35+08:00">2023-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-24 17:07:31" itemprop="dateModified" datetime="2023-10-24T17:07:31+08:00">2023-10-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -292,7 +310,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1</span>
+      <span>399</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -309,7 +327,42 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><img data-src="http://battle.wicp.io:9001/blog1/mxk.png" alt="mxk"></p>
+    <div class="post-body" itemprop="articleBody"><h2 id="1-minio-PicGo自建图床"><a href="#1-minio-PicGo自建图床" class="headerlink" title="1.minio+PicGo自建图床"></a>1.minio+PicGo自建图床</h2><p>使用docker拉取最新的镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull minio/minio</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="2-初始化"><a href="#2-初始化" class="headerlink" title="2.初始化"></a>2.初始化</h2><p>进行配置容器完成初始化，这里进行映射</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p <span class="number">9000</span>:<span class="number">9000</span> -p <span class="number">9001</span>:<span class="number">9001</span> --name minio -d --restart=always -e <span class="string">&quot;MINIO_ACCESS_KEY=xxx&quot;</span> -e <span class="string">&quot;MINIO_SECRET_KEY=xxxxxxxx&quot;</span> -v <span class="regexp">/volume1/</span>docker<span class="regexp">/miniIo/</span>data:<span class="regexp">/data -v /</span>volume1<span class="regexp">/docker/mi</span>niIo<span class="regexp">/config:/</span>root<span class="regexp">/.minio minio/mi</span>nio server --console-address <span class="string">&quot;:9000&quot;</span> --address <span class="string">&quot;:9001&quot;</span> /data</span><br></pre></td></tr></table></figure>
+
+<p> 在这个命令中，<code>-p 9000:9000</code> 将本地主机的端口9000映射到容器的9000端口，<code>-p 9001:9001</code> 将本地主机的端口9001映射到容器的9001端口。<br>    9000端口是控制台使用，9001端口是API使用，MINIO_ACCESS_KEY&#x3D;xxx这里设置登录的用户名，MINIO_SECRET_KEY&#x3D;xxxxxxxx这里设置登录的密码，&#x2F;home&#x2F;data是宿主机映射目录卷，&#x2F;home&#x2F;config是宿主机映射配置文件目录卷。</p>
+<p>用户名至少3位，密码至少8位。</p>
+<h2 id="3-配置MinIO"><a href="#3-配置MinIO" class="headerlink" title="3.配置MinIO"></a>3.配置MinIO</h2><p>现在可以通过ip:9000去访问了：</p>
+<p><img data-src="http://battle.wicp.io:9001/blog1/image-20231019161545783.png" alt="image-20231019161545783"></p>
+<p>首先创建一个存储桶：<br><img data-src="http://battle.wicp.io:9001/blog1/image-20231019161727230.png" alt="image-20231019161727230" style="zoom:80%;" /></p>
+<p>添加一项规则，设置为读写均允许</p>
+<img data-src="http://battle.wicp.io:9001/blog1/image-20231019161817172.png" alt="image-20231019161817172" style="zoom:67%;" />
+
+<p>通行规则改为public:</p>
+<p><img data-src="http://battle.wicp.io:9001/blog1/image-20231019161903905.png" alt="image-20231019161903905"></p>
+<p>创建ServiceAccount:</p>
+<img data-src="http://battle.wicp.io:9001/blog1/image-20231019161944574.png" alt="image-20231019161944574" style="zoom:67%;" />
+
+
+
+<p><img data-src="http://battle.wicp.io:9001/blog1/3c39a82910908a03c112857e30f54e1c.png" alt="3c39a82910908a03c112857e30f54e1c"></p>
+<h2 id="4-配置picgo"><a href="#4-配置picgo" class="headerlink" title="4.配置picgo"></a>4.配置picgo</h2><p>插件库中搜索minio<br><img data-src="http://battle.wicp.io:9001/blog1/image-20231019162104415.png" alt="image-20231019162104415" style="zoom:67%;" /></p>
+<p><img data-src="http://battle.wicp.io:9001/blog1/image-20231019162118827.png" alt="image-20231019162118827"></p>
+<p>将刚才生成的密钥输入</p>
+<p>，这里的路径不能加前缀“\”:</p>
+<p>只需要直接输入blog1,也就是存储桶的名字就行。</p>
+<p><img data-src="http://battle.wicp.io:9001/blog1/image-20231019162219985.png" alt="image-20231019162219985"></p>
+<p>以下这张图片的路径为</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">http</span>:<span class="comment">//battle.wicp.io:9001/blog1/image-20231019162219985.png</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img data-src="http://battle.wicp.io:9001/blog1/image-20231019162219985.png" alt="image-20231019162219985"></p>
 
     </div>
 
@@ -340,6 +393,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2023/10/19/%E7%BE%A4%E6%99%96%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/" rel="next" title="群晖操作记录">
+                  群晖操作记录 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -370,12 +426,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">30k</span>
+    <span title="站点总字数">47k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:48</span>
+    <span title="站点阅读时长">2:49</span>
 </div>
 
 
