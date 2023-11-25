@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="Henry&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-21T04:09:08.000Z">
-<meta property="article:modified_time" content="2023-10-21T04:28:04.390Z">
+<meta property="article:modified_time" content="2023-11-11T03:23:53.511Z">
 <meta property="article:author" content="Henry">
 <meta property="article:tag" content="原理">
 <meta name="twitter:card" content="summary">
@@ -154,18 +154,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -259,9 +259,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-10-21 12:09:08 / 修改时间：12:28:04" itemprop="dateCreated datePublished" datetime="2023-10-21T12:09:08+08:00">2023-10-21</time>
+      <time title="创建时间：2023-10-21 12:09:08" itemprop="dateCreated datePublished" datetime="2023-10-21T12:09:08+08:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-11 11:23:53" itemprop="dateModified" datetime="2023-11-11T11:23:53+08:00">2023-11-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -291,7 +297,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>94</span>
+      <span>162</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -311,6 +317,8 @@
     <div class="post-body" itemprop="articleBody"><hr>
 <span id="more"></span>
 
+
+
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 切换窗口</span></span><br><span class="line">driver.<span class="title function_">switchTo</span>().<span class="title function_">window</span>(driver.<span class="title function_">getWindowHandles</span>().<span class="title function_">toArray</span>()[<span class="number">1</span>].<span class="title function_">toString</span>()).<span class="title function_">click</span>();</span><br><span class="line"><span class="title class_">Thread</span>.<span class="title function_">sleep</span>(<span class="number">1500</span>);</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//id定位</span></span><br><span class="line">driver.<span class="title function_">findElement</span>(<span class="title class_">By</span>.<span class="title function_">id</span>(<span class="string">&quot;&quot;</span>)).<span class="title function_">click</span>();</span><br><span class="line">   <span class="title class_">Thread</span>.<span class="title function_">sleep</span>(<span class="number">1500</span>);</span><br></pre></td></tr></table></figure>
@@ -327,6 +335,18 @@
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//tagName定位</span></span><br><span class="line">driver.<span class="title function_">findElement</span>(<span class="title class_">By</span>.<span class="title function_">xpath</span>(<span class="string">&quot;&quot;</span>)).<span class="title function_">click</span>();</span><br><span class="line"><span class="title class_">Thread</span>.<span class="title function_">sleep</span>(<span class="number">1500</span>);</span><br></pre></td></tr></table></figure>
 
+<p>最大化窗口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最大化窗口</span></span><br><span class="line">driver.manage().window().maximize();</span><br></pre></td></tr></table></figure>
+
+<p>打开某个网站的首页</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.get(<span class="string">&quot;http://xxx.com&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>模拟鼠标的悬停</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openga.selenium.interactions.Actions;</span><br><span class="line"><span class="type">Actions</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Actions</span>(driver);</span><br><span class="line">builder.moveToElement(driver.findElement(By.xpath(<span class="string">&quot;111&quot;</span>))).perform();</span><br></pre></td></tr></table></figure>
+
+<p>刷新页面</p>
+<p>手动刷新页面需要用f5进行刷新</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.navigate().refresh();</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -393,12 +413,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">47k</span>
+    <span title="站点总字数">59k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:49</span>
+    <span title="站点阅读时长">3:36</span>
 </div>
 
 
@@ -478,6 +498,10 @@
 
 
   
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+
 
 
   <a target="_blank" rel="noopener" href="https://github.com/henryboom" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>

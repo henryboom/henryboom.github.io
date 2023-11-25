@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="ry验证码">
+<meta property="og:url" content="http://example.com/2023/10/29/ry%E9%AA%8C%E8%AF%81%E7%A0%81%E7%94%9F%E6%88%90/index.html">
+<meta property="og:site_name" content="Henry&#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310291006664.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310291007988.png">
+<meta property="og:image" content="http://battle.wicp.io:9001/blog1/202310291027517.png">
+<meta property="article:published_time" content="2023-10-29T01:49:57.000Z">
+<meta property="article:modified_time" content="2023-11-06T13:09:52.971Z">
+<meta property="article:author" content="Henry">
+<meta property="article:tag" content="原理">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://battle.wicp.io:9001/blog1/202310291006664.png">
+
+
+<link rel="canonical" href="http://example.com/2023/10/29/ry%E9%AA%8C%E8%AF%81%E7%A0%81%E7%94%9F%E6%88%90/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/10/29/ry%E9%AA%8C%E8%AF%81%E7%A0%81%E7%94%9F%E6%88%90/","path":"2023/10/29/ry验证码生成/","title":"ry验证码"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ry验证码 | Henry's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Henry's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code builds world !</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">前端发起请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF%E4%BC%9A%E4%BC%A0%E5%9B%9E%E7%94%9F%E6%88%90%E7%9A%84img%E7%9A%84%E7%BC%96%E7%A0%81%E4%B8%B2"><span class="nav-number">1.1.</span> <span class="nav-text">后端会传回生成的img的编码串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E4%BF%A1%E6%81%AF%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%EF%BC%9Adata-image-png%EF%BC%9Bbase64-%E5%9B%BE%E7%89%87%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.</span> <span class="nav-text">图片信息用浏览器显示：data:image&#x2F;png；base64,+图片内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-URI-scheme-%E6%98%AF%E4%BB%80%E4%B9%88-%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">Data URI scheme 是什么 ？？？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82"><span class="nav-number">2.</span> <span class="nav-text">后端处理请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">开始登录校验验证码</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Henry"
+      src="/images/lbxx.jpg">
+  <p class="site-author-name" itemprop="name">Henry</p>
+  <div class="site-description" itemprop="description">今天你干饭了吗？</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/henryboom" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;henryboom" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:rstyly233@gmail.com" title="E-Mail → mailto:rstyly233@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelopecustom_file_path fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+<div class="twopeople">
+        <div class="container" style="height:200px;">
+            <canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople1.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/zdog.dist.js"></script>
+        <script id="rendered-js" src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople.js"></script>
+        <style>
+            .twopeople{
+                margin: 0;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            canvas {
+                display: block;
+                margin: 0 auto;
+                cursor: move;
+            }
+        </style>
+      </div>
+​
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/29/ry%E9%AA%8C%E8%AF%81%E7%A0%81%E7%94%9F%E6%88%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lbxx.jpg">
+      <meta itemprop="name" content="Henry">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Henry's Blog">
+      <meta itemprop="description" content="今天你干饭了吗？">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ry验证码 | Henry's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ry验证码
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-29 09:49:57" itemprop="dateCreated datePublished" datetime="2023-10-29T09:49:57+08:00">2023-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-06 21:09:52" itemprop="dateModified" datetime="2023-11-06T21:09:52+08:00">2023-11-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/ruoyi/" itemprop="url" rel="index"><span itemprop="name">ruoyi</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><hr>
+<span id="more"></span>
+
+<h2 id="前端发起请求"><a href="#前端发起请求" class="headerlink" title="前端发起请求"></a>前端发起请求</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">...</span><br><span class="line">  &lt;el-form-item prop=&quot;code&quot; v-if=&quot;captchaEnabled&quot;&gt;</span><br><span class="line">        &lt;el-input</span><br><span class="line">          v-model=&quot;loginForm.code&quot;</span><br><span class="line">          auto-complete=&quot;off&quot;</span><br><span class="line">          placeholder=&quot;验证码&quot;</span><br><span class="line">          style=&quot;width: 63%&quot;</span><br><span class="line">          @keyup.enter.native=&quot;handleLogin&quot;</span><br><span class="line">        &gt;</span><br><span class="line">          &lt;svg-icon slot=&quot;prefix&quot; icon-class=&quot;validCode&quot; class=&quot;el-input__icon input-icon&quot; /&gt;</span><br><span class="line">        &lt;/el-input&gt;</span><br><span class="line">        &lt;div class=&quot;login-code&quot;&gt;</span><br><span class="line">          &lt;img :src=&quot;codeUrl&quot; @click=&quot;getCode&quot; class=&quot;login-code-img&quot;/&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/el-form-item&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import &#123; getCodeImg &#125; from &quot;@/api/login&quot;;</span><br><span class="line">import Cookies from &quot;js-cookie&quot;;</span><br><span class="line">import &#123; encrypt, decrypt &#125; from &#x27;@/utils/jsencrypt&#x27;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;Login&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      codeUrl: &quot;&quot;,</span><br><span class="line">      loginForm: &#123;</span><br><span class="line">        username: &quot;admin&quot;,</span><br><span class="line">        password: &quot;admin123&quot;,</span><br><span class="line">        rememberMe: false,</span><br><span class="line">        code: &quot;&quot;,</span><br><span class="line">        uuid: &quot;&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      loginRules: &#123;</span><br><span class="line">        username: [</span><br><span class="line">          &#123; required: true, trigger: &quot;blur&quot;, message: &quot;请输入您的账号&quot; &#125;</span><br><span class="line">        ],</span><br><span class="line">        password: [</span><br><span class="line">          &#123; required: true, trigger: &quot;blur&quot;, message: &quot;请输入您的密码&quot; &#125;</span><br><span class="line">        ],</span><br><span class="line">        code: [&#123; required: true, trigger: &quot;change&quot;, message: &quot;请输入验证码&quot; &#125;]</span><br><span class="line">      &#125;,</span><br><span class="line">      loading: false,</span><br><span class="line">      // 验证码开关</span><br><span class="line">      captchaEnabled: true,</span><br><span class="line">      // 注册开关</span><br><span class="line">      register: false,</span><br><span class="line">      redirect: undefined</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">  created() &#123;</span><br><span class="line">    this.getCode();</span><br><span class="line">    this.getCookie();</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getCode() &#123;</span><br><span class="line">      getCodeImg().then(res =&gt; &#123;</span><br><span class="line"></span><br><span class="line">      //如果接收到的值为 为undefined和true ,都会渲染验证码，健壮性的体现</span><br><span class="line">        this.captchaEnabled = res.captchaEnabled === undefined ? true : res.captchaEnabled;</span><br><span class="line">        if (this.captchaEnabled) &#123;</span><br><span class="line">          this.codeUrl = &quot;data:image/gif;base64,&quot; + res.img;</span><br><span class="line">          this.loginForm.uuid = res.uuid;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="后端会传回生成的img的编码串"><a href="#后端会传回生成的img的编码串" class="headerlink" title="后端会传回生成的img的编码串"></a>后端会传回生成的img的编码串</h3> <img data-src="http://battle.wicp.io:9001/blog1/202310291006664.png" alt="image-20231029100636338" style="zoom: 67%;" />
+
+<p><img data-src="http://battle.wicp.io:9001/blog1/202310291007988.png" alt="image-20231029100704714"></p>
+<h3 id="图片信息用浏览器显示：data-image-png；base64-图片内容"><a href="#图片信息用浏览器显示：data-image-png；base64-图片内容" class="headerlink" title="图片信息用浏览器显示：data:image&#x2F;png；base64,+图片内容"></a>图片信息用浏览器显示：data:image&#x2F;png；base64,+图片内容</h3><p>直接把内容放到浏览器是无法显示的，需要前面加</p>
+<blockquote>
+<p><strong>data:image&#x2F;png;base64,</strong></p>
+</blockquote>
+<p>如下 </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data:image<span class="regexp">/png;base64,/</span><span class="number">9</span>j<span class="regexp">/4AAQSkZJRgABAgAAAQABAAD/</span><span class="number">2</span>wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0...</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">getCode</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="title function_">getCodeImg</span>().<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//如果接收到的值为 为undefined和true ,都会渲染验证码，健壮性的体现</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">captchaEnabled</span> = res.<span class="property">captchaEnabled</span> === <span class="literal">undefined</span> ? <span class="literal">true</span> : res.<span class="property">captchaEnabled</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">captchaEnabled</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">codeUrl</span> = <span class="string">&quot;data:image/gif;base64,&quot;</span> + res.<span class="property">img</span>;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">loginForm</span>.<span class="property">uuid</span> = res.<span class="property">uuid</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<img data-src="http://battle.wicp.io:9001/blog1/202310291027517.png" alt="image-20231029102737588" style="zoom:67%;" />
+
+<p>data:image&#x2F;png;base64, 字符串… 这个表示什么意思，又有什么作用呢？<br> 其实这就是所谓的 Data URI scheme。 直译过来的意思是：URI 数据处理方案… </p>
+<h3 id="Data-URI-scheme-是什么-？？？"><a href="#Data-URI-scheme-是什么-？？？" class="headerlink" title="Data URI scheme 是什么 ？？？"></a>Data URI scheme 是什么 ？？？</h3><blockquote>
+<p><strong>Data URI scheme 是在 RFC2397 中定义的，目的是将一些小的数据，直接嵌入到网页中，从而不用再从外部文件载入。减少对 HTTP 的请求次数。达到优化网页的效果。</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>base64 后面那一串字符，其实是一张图片，将这些字符串复制粘贴到浏览器的中打开，就能看到图片了</strong></p>
+</blockquote>
+<hr>
+<p>假设你有的图像：A.jpg ，把它在网页上显示出来的标准方法是：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">img</span> <span class="attribute">src</span>=&quot;http://sjolzy.cn/images/A.jpg<span class="string">&quot;/&gt;</span></span><br><span class="line"><span class="string">1</span></span><br></pre></td></tr></table></figure>
+
+<p>这种取得数据的方法称为 <strong>http URI scheme</strong> 。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">img</span> <span class="attribute">src</span>=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAAGElEQVQIW2P4DwcMDAxAfBvMAhEQMYgcACEHG8ELxtbPAAAAAElFTkSuQmCC&quot; /&gt;</span><br><span class="line"></span><br><span class="line"><span class="number">123</span></span><br></pre></td></tr></table></figure>
+
+<p>这种取得数据的方法称为 <strong>Data URI scheme</strong> 。</p>
+<h2 id="后端处理请求"><a href="#后端处理请求" class="headerlink" title="后端处理请求"></a>后端处理请求</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/captchaImage&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> AjaxResult <span class="title function_">getCode</span><span class="params">(HttpServletResponse response)</span> <span class="keyword">throws</span> IOException</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//创建一个返回对象，此时未设置任何有效属性</span></span><br><span class="line">        <span class="type">AjaxResult</span> <span class="variable">ajax</span> <span class="operator">=</span> AjaxResult.success();</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">captchaEnabled</span> <span class="operator">=</span> configService.selectCaptchaEnabled();</span><br><span class="line">        ajax.put(<span class="string">&quot;captchaEnabled&quot;</span>, captchaEnabled);</span><br><span class="line">        <span class="keyword">if</span> (!captchaEnabled)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> ajax;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 保存验证码信息</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">uuid</span> <span class="operator">=</span> IdUtils.simpleUUID();</span><br><span class="line">        <span class="type">String</span> <span class="variable">verifyKey</span> <span class="operator">=</span> CacheConstants.CAPTCHA_CODE_KEY + uuid;</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">capStr</span> <span class="operator">=</span> <span class="literal">null</span>, code = <span class="literal">null</span>;</span><br><span class="line">        <span class="type">BufferedImage</span> <span class="variable">image</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 生成验证码</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">captchaType</span> <span class="operator">=</span> RuoYiConfig.getCaptchaType();</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;math&quot;</span>.equals(captchaType))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">capText</span> <span class="operator">=</span> captchaProducerMath.createText();</span><br><span class="line">            <span class="comment">//锁定倒数第一个“@”</span></span><br><span class="line">            capStr = capText.substring(<span class="number">0</span>, capText.lastIndexOf(<span class="string">&quot;@&quot;</span>));</span><br><span class="line">            code = capText.substring(capText.lastIndexOf(<span class="string">&quot;@&quot;</span>) + <span class="number">1</span>);</span><br><span class="line">            image = captchaProducerMath.createImage(capStr);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;char&quot;</span>.equals(captchaType))</span><br><span class="line">        &#123;</span><br><span class="line">            capStr = code = captchaProducer.createText();</span><br><span class="line">            image = captchaProducer.createImage(capStr);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//生成验证码后，将结果预先存入redis，后续登录时根据uuid取出然后验证</span></span><br><span class="line">        redisCache.setCacheObject(verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);</span><br><span class="line">        <span class="comment">// 转换流信息写出</span></span><br><span class="line">        <span class="type">FastByteArrayOutputStream</span> <span class="variable">os</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FastByteArrayOutputStream</span>();</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            ImageIO.write(image, <span class="string">&quot;jpg&quot;</span>, os);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (IOException e)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> AjaxResult.error(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ajax.put(<span class="string">&quot;uuid&quot;</span>, uuid);</span><br><span class="line">        ajax.put(<span class="string">&quot;img&quot;</span>, Base64.encode(os.toByteArray()));</span><br><span class="line">        <span class="keyword">return</span> ajax;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="开始登录校验验证码"><a href="#开始登录校验验证码" class="headerlink" title="开始登录校验验证码"></a>开始登录校验验证码</h2><p>先进行验证码校验</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 登录验证</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> username 用户名</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> password 密码</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> code 验证码</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> uuid 唯一标识</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">login</span><span class="params">(String username, String password, String code, String uuid)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 验证码校验</span></span><br><span class="line">    validateCaptcha(username, code, uuid);</span><br><span class="line">    <span class="comment">// 登录前置校验</span></span><br><span class="line">    loginPreCheck(username, password);</span><br><span class="line">    <span class="comment">// 用户验证</span></span><br><span class="line">    <span class="type">Authentication</span> <span class="variable">authentication</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">UsernamePasswordAuthenticationToken</span> <span class="variable">authenticationToken</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UsernamePasswordAuthenticationToken</span>(username, password);</span><br><span class="line">        AuthenticationContextHolder.setContext(authenticationToken);</span><br><span class="line">        <span class="comment">// 该方法会去调用UserDetailsServiceImpl.loadUserByUsername</span></span><br><span class="line">        authentication = authenticationManager.authenticate(authenticationToken);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception e)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (e <span class="keyword">instanceof</span> BadCredentialsException)</span><br><span class="line">        &#123;</span><br><span class="line">            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message(<span class="string">&quot;user.password.not.match&quot;</span>)));</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UserPasswordNotMatchException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, e.getMessage()));</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ServiceException</span>(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">finally</span></span><br><span class="line">    &#123;</span><br><span class="line">        AuthenticationContextHolder.clearContext();</span><br><span class="line">    &#125;</span><br><span class="line">    AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message(<span class="string">&quot;user.login.success&quot;</span>)));</span><br><span class="line">    <span class="type">LoginUser</span> <span class="variable">loginUser</span> <span class="operator">=</span> (LoginUser) authentication.getPrincipal();</span><br><span class="line">    recordLoginInfo(loginUser.getUserId());</span><br><span class="line">    <span class="comment">// 生成token</span></span><br><span class="line">    <span class="keyword">return</span> tokenService.createToken(loginUser);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>从redis中取出计算的结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 校验验证码</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> username 用户名</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> code 验证码</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> uuid 唯一标识</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">validateCaptcha</span><span class="params">(String username, String code, String uuid)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//读取验证码开关</span></span><br><span class="line">    <span class="type">boolean</span> <span class="variable">captchaEnabled</span> <span class="operator">=</span> configService.selectCaptchaEnabled();</span><br><span class="line">    <span class="keyword">if</span> (captchaEnabled)</span><br><span class="line">    &#123;   <span class="comment">//StringUtils.nvl(uuid, &quot;&quot;);若为空则赋值为“”</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">verifyKey</span> <span class="operator">=</span> CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, <span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="comment">//生成验证时存入了结果</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">captcha</span> <span class="operator">=</span> redisCache.getCacheObject(verifyKey);</span><br><span class="line">        redisCache.deleteObject(verifyKey);</span><br><span class="line">        <span class="keyword">if</span> (captcha == <span class="literal">null</span>)</span><br><span class="line">        &#123;   <span class="comment">//出错了，创建异步控制器，执行记录登录信息，提示验证码过期，手动抛出错误</span></span><br><span class="line">            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message(<span class="string">&quot;user.jcaptcha.expire&quot;</span>)));</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">CaptchaExpireException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!code.equalsIgnoreCase(captcha))</span><br><span class="line">        &#123;</span><br><span class="line">            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message(<span class="string">&quot;user.jcaptcha.error&quot;</span>)));</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">CaptchaException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>前置验证</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 登录前置校验</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> username 用户名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> password 用户密码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">loginPreCheck</span><span class="params">(String username, String password)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 用户名或密码为空 错误</span></span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isEmpty(username) || StringUtils.isEmpty(password))</span><br><span class="line">        &#123;</span><br><span class="line">            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message(<span class="string">&quot;not.null&quot;</span>)));</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UserNotExistsException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 密码如果不在指定范围内 错误</span></span><br><span class="line">        <span class="keyword">if</span> (password.length() &lt; UserConstants.PASSWORD_MIN_LENGTH</span><br><span class="line">                || password.length() &gt; UserConstants.PASSWORD_MAX_LENGTH)</span><br><span class="line">        &#123;</span><br><span class="line">            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message(<span class="string">&quot;user.password.not.match&quot;</span>)));</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UserPasswordNotMatchException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 用户名不在指定范围内 错误</span></span><br><span class="line">        <span class="keyword">if</span> (username.length() &lt; UserConstants.USERNAME_MIN_LENGTH</span><br><span class="line">                || username.length() &gt; UserConstants.USERNAME_MAX_LENGTH)</span><br><span class="line">        &#123;</span><br><span class="line">            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message(<span class="string">&quot;user.password.not.match&quot;</span>)));</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UserPasswordNotMatchException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// IP黑名单校验</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">blackStr</span> <span class="operator">=</span> configService.selectConfigByKey(<span class="string">&quot;sys.login.blackIPList&quot;</span>);</span><br><span class="line">        <span class="comment">//判断当前登录的ip是否处于黑名单</span></span><br><span class="line">        <span class="keyword">if</span> (IpUtils.isMatchedIp(blackStr, IpUtils.getIpAddr()))</span><br><span class="line">        &#123;</span><br><span class="line">            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message(<span class="string">&quot;login.blocked&quot;</span>)));</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">BlackListException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8E%9F%E7%90%86/" rel="tag"># 原理</a>
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/28/ry%E5%AF%B9axios%E5%B0%81%E8%A3%85/" rel="prev" title="ry对axios封装">
+                  <i class="fa fa-angle-left"></i> ry对axios封装
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/29/vuex/" rel="next" title="Vuex">
+                  Vuex <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Henry</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">59k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:36</span>
+</div>
+
+
+
+
+<footer class="text-center mt-5 py-3">
+  
+
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("05/27/2023 00:00:00");//此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "已安全运行 "+dnum+" 天";  //此次自定义显示内容
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }  //此次自定义显示内容
+      setInterval("createtime()",250);
+      </script>
+    </div>
+  </div>
+
+</footer>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+
+
+
+  <a target="_blank" rel="noopener" href="https://github.com/henryboom" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+
+
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>

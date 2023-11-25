@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="排序List排序12345678List&lt;Integer&gt; innerList;         Collections.sort(innerList, new Comparator&lt;Integer&gt;() &amp;#123;             @Override             public int compare(Integer o1, Integer o2) &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java常用集合">
+<meta property="og:url" content="http://example.com/2023/10/09/Java%E5%B8%B8%E7%94%A8%E9%9B%86%E5%90%88/index.html">
+<meta property="og:site_name" content="Henry&#39;s Blog">
+<meta property="og:description" content="排序List排序12345678List&lt;Integer&gt; innerList;         Collections.sort(innerList, new Comparator&lt;Integer&gt;() &amp;#123;             @Override             public int compare(Integer o1, Integer o2) &amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2020/06/408px-Singly-linked-list.svg_.png">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2020/06/610px-Doubly-linked-list.svg_.png">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2020/06/linkedlist-2020-11-16.png">
+<meta property="article:published_time" content="2023-10-09T08:03:23.000Z">
+<meta property="article:modified_time" content="2023-10-26T02:51:52.751Z">
+<meta property="article:author" content="Henry">
+<meta property="article:tag" content="原理">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.runoob.com/wp-content/uploads/2020/06/408px-Singly-linked-list.svg_.png">
+
+
+<link rel="canonical" href="http://example.com/2023/10/09/Java%E5%B8%B8%E7%94%A8%E9%9B%86%E5%90%88/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/10/09/Java%E5%B8%B8%E7%94%A8%E9%9B%86%E5%90%88/","path":"2023/10/09/Java常用集合/","title":"Java常用集合"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java常用集合 | Henry's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Henry's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code builds world !</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List%E6%8E%92%E5%BA%8F"><span class="nav-number">1.1.</span> <span class="nav-text">List排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList%E6%8E%92%E5%BA%8F"><span class="nav-number">1.2.</span> <span class="nav-text">ArrayList排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">String类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#substring-%E6%88%AA%E5%8F%96%E7%9A%84%E6%97%B6%E5%80%99%E4%B8%8D%E5%8C%85%E6%8B%AC%E6%9C%AB%E5%B0%BE%E4%B8%8B%E6%A0%87%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="nav-number">2.1.</span> <span class="nav-text">substring 截取的时候不包括末尾下标的字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedList"><span class="nav-number">3.</span> <span class="nav-text">LinkedList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.1.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-1"><span class="nav-number">3.2.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-2"><span class="nav-number">3.3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-3"><span class="nav-number">3.4.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-4"><span class="nav-number">3.5.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-5"><span class="nav-number">3.6.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-6"><span class="nav-number">3.7.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%85%83%E7%B4%A0"><span class="nav-number">3.7.1.</span> <span class="nav-text">迭代元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-7"><span class="nav-number">3.8.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-8"><span class="nav-number">3.9.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.10.</span> <span class="nav-text">常用方法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Henry"
+      src="/images/lbxx.jpg">
+  <p class="site-author-name" itemprop="name">Henry</p>
+  <div class="site-description" itemprop="description">今天你干饭了吗？</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/henryboom" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;henryboom" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:rstyly233@gmail.com" title="E-Mail → mailto:rstyly233@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelopecustom_file_path fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+<div class="twopeople">
+        <div class="container" style="height:200px;">
+            <canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople1.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/zdog.dist.js"></script>
+        <script id="rendered-js" src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/twopeople.js"></script>
+        <style>
+            .twopeople{
+                margin: 0;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            canvas {
+                display: block;
+                margin: 0 auto;
+                cursor: move;
+            }
+        </style>
+      </div>
+​
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/09/Java%E5%B8%B8%E7%94%A8%E9%9B%86%E5%90%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lbxx.jpg">
+      <meta itemprop="name" content="Henry">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Henry's Blog">
+      <meta itemprop="description" content="今天你干饭了吗？">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java常用集合 | Henry's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java常用集合
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-09 16:03:23" itemprop="dateCreated datePublished" datetime="2023-10-09T16:03:23+08:00">2023-10-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-26 10:51:52" itemprop="dateModified" datetime="2023-10-26T10:51:52+08:00">2023-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="List排序"><a href="#List排序" class="headerlink" title="List排序"></a>List排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; innerList;</span><br><span class="line">         Collections.sort(innerList, <span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Integer&gt;() &#123;</span><br><span class="line">             <span class="meta">@Override</span></span><br><span class="line">             <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Integer o1, Integer o2)</span> &#123;</span><br><span class="line">                 <span class="keyword">return</span> o1.compareTo(o2); <span class="comment">// 升序排序</span></span><br><span class="line">                 <span class="comment">// 如果需要降序排序，可以改为 return o2.compareTo(o1);</span></span><br><span class="line">             &#125;</span><br><span class="line">         &#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<span id="more"></span>
+
+<h3 id="ArrayList排序"><a href="#ArrayList排序" class="headerlink" title="ArrayList排序"></a>ArrayList排序</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用 <span class="module-access"><span class="module"><span class="identifier">Collections</span>.</span></span>reverse<span class="constructor">Order()</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用<code>Collections.reverseOrder()</code>方法来获得一个降序比较器，而不需要创建自定义的比较器。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayListReverseSorting</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;Integer&gt; numbers = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        numbers.add(<span class="number">3</span>);</span><br><span class="line">        numbers.add(<span class="number">1</span>);</span><br><span class="line">        numbers.add(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用降序比较器进行排序</span></span><br><span class="line">        Collections.sort(numbers, Collections.reverseOrder());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Integer number : numbers) &#123;</span><br><span class="line">            System.out.println(number);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h2><h3 id="substring-截取的时候不包括末尾下标的字符"><a href="#substring-截取的时候不包括末尾下标的字符" class="headerlink" title="substring 截取的时候不包括末尾下标的字符"></a>substring 截取的时候不包括末尾下标的字符</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">subStr</span> <span class="operator">=</span> str.substring(<span class="number">0</span>, <span class="number">5</span>); <span class="comment">// 从下标0（包括）到下标5（不包括）提取子字符串</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><p>链表（Linked list）是一种常见的基础数据结构，是一种线性表，但是并不会按线性的顺序存储数据，而是在每一个节点里存到下一个节点的地址。</p>
+<p>链表可分为单向链表和双向链表。</p>
+<p>一个单向链表包含两个值: 当前节点的值和一个指向下一个节点的链接。</p>
+<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/06/408px-Singly-linked-list.svg_.png" alt="img"></p>
+<p>一个双向链表有三个整数值: 数值、向后的节点链接、向前的节点链接。</p>
+<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/06/610px-Doubly-linked-list.svg_.png" alt="img"></p>
+<p>Java LinkedList（链表） 类似于 ArrayList，是一种常用的数据容器。</p>
+<p>与 ArrayList 相比，LinkedList 的增加和删除的操作效率更高，而查找和修改的操作效率较低。</p>
+<p><strong>以下情况使用 ArrayList :</strong></p>
+<ul>
+<li>频繁访问列表中的某一个元素。</li>
+<li>只需要在列表末尾进行添加和删除元素操作。</li>
+</ul>
+<p><strong>以下情况使用 LinkedList :</strong></p>
+<ul>
+<li>你需要通过循环迭代来访问列表中的某些元素。</li>
+<li>需要频繁的在列表开头、中间、末尾等位置进行添加和删除元素操作。</li>
+</ul>
+<p>LinkedList 继承了 AbstractSequentialList 类。</p>
+<p>LinkedList 实现了 Queue 接口，可作为队列使用。</p>
+<p>LinkedList 实现了 List 接口，可进行列表的相关操作。</p>
+<p>LinkedList 实现了 Deque 接口，可作为队列使用。</p>
+<p>LinkedList 实现了 Cloneable 接口，可实现克隆。</p>
+<p>LinkedList 实现了 java.io.Serializable 接口，即可支持序列化，能通过序列化去传输。</p>
+<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/06/linkedlist-2020-11-16.png" alt="img"></p>
+<p>LinkedList 类位于 java.util 包中，使用前需要引入它，语法格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 LinkedList 类</span></span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList; </span><br><span class="line"></span><br><span class="line">LinkedList&lt;E&gt; list = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;E&gt;();   <span class="comment">// 普通创建方法</span></span><br><span class="line">或者</span><br><span class="line">LinkedList&lt;E&gt; list = <span class="keyword">new</span> <span class="title class_">LinkedList</span>(Collection&lt;? <span class="keyword">extends</span> <span class="title class_">E</span>&gt; c); <span class="comment">// 使用集合创建链表</span></span><br></pre></td></tr></table></figure>
+
+<p>创建一个简单的链表实例：</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><em>&#x2F;&#x2F; 引入 LinkedList 类</em><br> <strong>import</strong> java.util.LinkedList;</p>
+<p> <strong>public</strong> <strong>class</strong> RunoobTest {<br>   <strong>public</strong> <strong>static</strong> <strong>void</strong> main(String[] args) {<br>     LinkedList<String> sites &#x3D; <strong>new</strong> LinkedList<String>();<br>     sites.add(“Google”);<br>     sites.add(“Runoob”);<br>     sites.add(“Taobao”);<br>     sites.add(“Weibo”);<br>     System.out.println(sites);<br>   }<br> }</p>
+<p>以上实例，执行输出结果为：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[Google, Runoob, Taobao, Weibo]</span></span><br></pre></td></tr></table></figure>
+
+<p>更多的情况下我们使用 ArrayList 访问列表中的随机元素更加高效，但以下几种情况 LinkedList 提供了更高效的方法。</p>
+<p>在列表开头添加元素：</p>
+<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><p><em>&#x2F;&#x2F; 引入 LinkedList 类</em><br> <strong>import</strong> java.util.LinkedList;</p>
+<p> <strong>public</strong> <strong>class</strong> RunoobTest {<br>   <strong>public</strong> <strong>static</strong> <strong>void</strong> main(String[] args) {<br>     LinkedList<String> sites &#x3D; <strong>new</strong> LinkedList<String>();<br>     sites.add(“Google”);<br>     sites.add(“Runoob”);<br>     sites.add(“Taobao”);<br>     <em>&#x2F;&#x2F; 使用 addFirst() 在头部添加元素</em><br>     sites.addFirst(“Wiki”);<br>     System.out.println(sites);<br>   }<br> }</p>
+<p>以上实例，执行输出结果为：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[Wiki, Google, Runoob, Taobao]</span></span><br></pre></td></tr></table></figure>
+
+<p>在列表结尾添加元素：</p>
+<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><p><em>&#x2F;&#x2F; 引入 LinkedList 类</em><br> <strong>import</strong> java.util.LinkedList;</p>
+<p> <strong>public</strong> <strong>class</strong> RunoobTest {<br>   <strong>public</strong> <strong>static</strong> <strong>void</strong> main(String[] args) {<br>     LinkedList<String> sites &#x3D; <strong>new</strong> LinkedList<String>();<br>     sites.add(“Google”);<br>     sites.add(“Runoob”);<br>     sites.add(“Taobao”);<br>     <em>&#x2F;&#x2F; 使用 addLast() 在尾部添加元素</em><br>     sites.addLast(“Wiki”);<br>     System.out.println(sites);<br>   }<br> }</p>
+<p>以上实例，执行输出结果为：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[Google, Runoob, Taobao, Wiki]</span></span><br></pre></td></tr></table></figure>
+
+<p>在列表开头移除元素：</p>
+<h3 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h3><p><em>&#x2F;&#x2F; 引入 LinkedList 类</em><br> <strong>import</strong> java.util.LinkedList;</p>
+<p> <strong>public</strong> <strong>class</strong> RunoobTest {<br>   <strong>public</strong> <strong>static</strong> <strong>void</strong> main(String[] args) {<br>     LinkedList<String> sites &#x3D; <strong>new</strong> LinkedList<String>();<br>     sites.add(“Google”);<br>     sites.add(“Runoob”);<br>     sites.add(“Taobao”);<br>     sites.add(“Weibo”);<br>     <em>&#x2F;&#x2F; 使用 removeFirst() 移除头部元素</em><br>     sites.removeFirst();<br>     System.out.println(sites);<br>   }<br> }</p>
+<p>以上实例，执行输出结果为：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[Runoob, Taobao, Weibo]</span></span><br></pre></td></tr></table></figure>
+
+<p>在列表结尾移除元素：</p>
+<h3 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h3><p><em>&#x2F;&#x2F; 引入 LinkedList 类</em><br> <strong>import</strong> java.util.LinkedList;</p>
+<p> <strong>public</strong> <strong>class</strong> RunoobTest {<br>   <strong>public</strong> <strong>static</strong> <strong>void</strong> main(String[] args) {<br>     LinkedList<String> sites &#x3D; <strong>new</strong> LinkedList<String>();<br>     sites.add(“Google”);<br>     sites.add(“Runoob”);<br>     sites.add(“Taobao”);<br>     sites.add(“Weibo”);<br>     <em>&#x2F;&#x2F; 使用 removeLast() 移除尾部元素</em><br>     sites.removeLast();<br>     System.out.println(sites);<br>   }<br> }</p>
+<p>以上实例，执行输出结果为：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[Google, Runoob, Taobao]</span></span><br></pre></td></tr></table></figure>
+
+<p>获取列表开头的元素：</p>
+<h3 id="实例-5"><a href="#实例-5" class="headerlink" title="实例"></a>实例</h3><p><em>&#x2F;&#x2F; 引入 LinkedList 类</em><br> <strong>import</strong> java.util.LinkedList;</p>
+<p> <strong>public</strong> <strong>class</strong> RunoobTest {<br>   <strong>public</strong> <strong>static</strong> <strong>void</strong> main(String[] args) {<br>     LinkedList<String> sites &#x3D; <strong>new</strong> LinkedList<String>();<br>     sites.add(“Google”);<br>     sites.add(“Runoob”);<br>     sites.add(“Taobao”);<br>     sites.add(“Weibo”);<br>     <em>&#x2F;&#x2F; 使用 getFirst() 获取头部元素</em><br>     System.out.println(sites.getFirst());<br>   }<br> }</p>
+<p>以上实例，执行输出结果为：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Google</span></span><br></pre></td></tr></table></figure>
+
+<p>获取列表结尾的元素：</p>
+<h3 id="实例-6"><a href="#实例-6" class="headerlink" title="实例"></a>实例</h3><p><em>&#x2F;&#x2F; 引入 LinkedList 类</em><br> <strong>import</strong> java.util.LinkedList;</p>
+<p> <strong>public</strong> <strong>class</strong> RunoobTest {<br>   <strong>public</strong> <strong>static</strong> <strong>void</strong> main(String[] args) {<br>     LinkedList<String> sites &#x3D; <strong>new</strong> LinkedList<String>();<br>     sites.add(“Google”);<br>     sites.add(“Runoob”);<br>     sites.add(“Taobao”);<br>     sites.add(“Weibo”);<br>     <em>&#x2F;&#x2F; 使用 getLast() 获取尾部元素</em><br>     System.out.println(sites.getLast());<br>   }<br> }</p>
+<p>以上实例，执行输出结果为：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Weibo</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="迭代元素"><a href="#迭代元素" class="headerlink" title="迭代元素"></a>迭代元素</h4><p>我们可以使用 for 配合 size() 方法来迭代列表中的元素：</p>
+<h3 id="实例-7"><a href="#实例-7" class="headerlink" title="实例"></a>实例</h3><p><em>&#x2F;&#x2F; 引入 LinkedList 类</em><br> <strong>import</strong> java.util.LinkedList;</p>
+<p> <strong>public</strong> <strong>class</strong> RunoobTest {<br>   <strong>public</strong> <strong>static</strong> <strong>void</strong> main(String[] args) {<br>     LinkedList<String> sites &#x3D; <strong>new</strong> LinkedList<String>();<br>     sites.add(“Google”);<br>     sites.add(“Runoob”);<br>     sites.add(“Taobao”);<br>     sites.add(“Weibo”);<br>     <strong>for</strong> (<strong>int</strong> size &#x3D; sites.size(), i &#x3D; 0; i &lt; size; i++) {<br>       System.out.println(sites.get(i));<br>     }<br>   }<br> }</p>
+<p>size() 方法用于计算链表的大小。</p>
+<p>以上实例，执行输出结果为：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Google</span></span><br><span class="line"><span class="attribute">Runoob</span></span><br><span class="line"><span class="attribute">Taobao</span></span><br><span class="line"><span class="attribute">Weibo</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以使用 for-each 来迭代元素：</p>
+<h3 id="实例-8"><a href="#实例-8" class="headerlink" title="实例"></a>实例</h3><p><em>&#x2F;&#x2F; 引入 LinkedList 类</em><br> <strong>import</strong> java.util.LinkedList;</p>
+<p> <strong>public</strong> <strong>class</strong> RunoobTest {<br>   <strong>public</strong> <strong>static</strong> <strong>void</strong> main(String[] args) {<br>     LinkedList<String> sites &#x3D; <strong>new</strong> LinkedList<String>();<br>     sites.add(“Google”);<br>     sites.add(“Runoob”);<br>     sites.add(“Taobao”);<br>     sites.add(“Weibo”);<br>     <strong>for</strong> (String i : sites) {<br>       System.out.println(i);<br>     }<br>   }<br> }</p>
+<p>以上实例，执行输出结果为：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Google</span></span><br><span class="line"><span class="attribute">Runoob</span></span><br><span class="line"><span class="attribute">Taobao</span></span><br><span class="line"><span class="attribute">Weibo</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public boolean add(E e)</td>
+<td>链表末尾添加元素，返回是否成功，成功为 true，失败为 false。</td>
+</tr>
+<tr>
+<td>public void add(int index, E element)</td>
+<td>向指定位置插入元素。</td>
+</tr>
+<tr>
+<td>public boolean addAll(Collection c)</td>
+<td>将一个集合的所有元素添加到链表后面，返回是否成功，成功为 true，失败为 false。</td>
+</tr>
+<tr>
+<td>public boolean addAll(int index, Collection c)</td>
+<td>将一个集合的所有元素添加到链表的指定位置后面，返回是否成功，成功为 true，失败为 false。</td>
+</tr>
+<tr>
+<td>public void addFirst(E e)</td>
+<td>元素添加到头部。</td>
+</tr>
+<tr>
+<td>public void addLast(E e)</td>
+<td>元素添加到尾部。</td>
+</tr>
+<tr>
+<td>public boolean offer(E e)</td>
+<td>向链表末尾添加元素，返回是否成功，成功为 true，失败为 false。</td>
+</tr>
+<tr>
+<td>public boolean offerFirst(E e)</td>
+<td>头部插入元素，返回是否成功，成功为 true，失败为 false。</td>
+</tr>
+<tr>
+<td>public boolean offerLast(E e)</td>
+<td>尾部插入元素，返回是否成功，成功为 true，失败为 false。</td>
+</tr>
+<tr>
+<td>public void clear()</td>
+<td>清空链表。</td>
+</tr>
+<tr>
+<td>public E removeFirst()</td>
+<td>删除并返回第一个元素。</td>
+</tr>
+<tr>
+<td>public E removeLast()</td>
+<td>删除并返回最后一个元素。</td>
+</tr>
+<tr>
+<td>public boolean remove(Object o)</td>
+<td>删除某一元素，返回是否成功，成功为 true，失败为 false。</td>
+</tr>
+<tr>
+<td>public E remove(int index)</td>
+<td>删除指定位置的元素。</td>
+</tr>
+<tr>
+<td>public E poll()</td>
+<td>删除并返回第一个元素。</td>
+</tr>
+<tr>
+<td>public E remove()</td>
+<td>删除并返回第一个元素。</td>
+</tr>
+<tr>
+<td>public boolean contains(Object o)</td>
+<td>判断是否含有某一元素。</td>
+</tr>
+<tr>
+<td>public E get(int index)</td>
+<td>返回指定位置的元素。</td>
+</tr>
+<tr>
+<td>public E getFirst()</td>
+<td>返回第一个元素。</td>
+</tr>
+<tr>
+<td>public E getLast()</td>
+<td>返回最后一个元素。</td>
+</tr>
+<tr>
+<td>public int indexOf(Object o)</td>
+<td>查找指定元素从前往后第一次出现的索引。</td>
+</tr>
+<tr>
+<td>public int lastIndexOf(Object o)</td>
+<td>查找指定元素最后一次出现的索引。</td>
+</tr>
+<tr>
+<td>public E peek()</td>
+<td>返回第一个元素。</td>
+</tr>
+<tr>
+<td>public E element()</td>
+<td>返回第一个元素。</td>
+</tr>
+<tr>
+<td>public E peekFirst()</td>
+<td>返回头部元素。</td>
+</tr>
+<tr>
+<td>public E peekLast()</td>
+<td>返回尾部元素。</td>
+</tr>
+<tr>
+<td>public E set(int index, E element)</td>
+<td>设置指定位置的元素。</td>
+</tr>
+<tr>
+<td>public Object clone()</td>
+<td>克隆该列表。</td>
+</tr>
+<tr>
+<td>public Iterator descendingIterator()</td>
+<td>返回倒序迭代器。</td>
+</tr>
+<tr>
+<td>public int size()</td>
+<td>返回链表元素个数。</td>
+</tr>
+<tr>
+<td>public ListIterator listIterator(int index)</td>
+<td>返回从指定位置开始到末尾的迭代器。</td>
+</tr>
+<tr>
+<td>public Object[] toArray()</td>
+<td>返回一个由链表元素组成的数组。</td>
+</tr>
+<tr>
+<td>public  T[] toArray(T[] a)</td>
+<td>返回一个由链表元素转换类型而成的数组。</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8E%9F%E7%90%86/" rel="tag"># 原理</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/06/session-%E4%B8%8E-Cookie/" rel="prev" title="session 与 Cookie">
+                  <i class="fa fa-angle-left"></i> session 与 Cookie
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/15/Vue%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" rel="next" title="Vue基础语法">
+                  Vue基础语法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Henry</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">59k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:36</span>
+</div>
+
+
+
+
+<footer class="text-center mt-5 py-3">
+  
+
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("05/27/2023 00:00:00");//此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "已安全运行 "+dnum+" 天";  //此次自定义显示内容
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }  //此次自定义显示内容
+      setInterval("createtime()",250);
+      </script>
+    </div>
+  </div>
+
+</footer>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+
+
+
+  <a target="_blank" rel="noopener" href="https://github.com/henryboom" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+
+
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
